@@ -1,0 +1,73 @@
+<ng-container [ngSwitch]="currentStatus">
+  <div class="dialog" *ngSwitchCase="Status.loading">
+    <mat-spinner class="spinner" [diameter]="40"></mat-spinner>
+  </div>
+  <div class="dialog" *ngSwitchCase="Status.loaded">
+    <mat-icon class="close-icon" (click)="closeModal()">close</mat-icon>
+    <span class="mat-body-2 title">Create User</span>
+    <div class="page-1" fxLayout="column">
+      <p class="mat-body text">Enter your user data.</p>
+      <form [formGroup]="form" (ngSubmit)="createUser(form.value)">
+        <mat-form-field hintLabel="Enter a username" appearance="fill" class="form-p-1">
+          <mat-icon matPrefix class="prefix">account_circle</mat-icon>
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" type="text" #username required>
+          <mat-error *ngIf="form.hasError('required','username')">
+            Enter your username.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field hintLabel="Enter a valid e-mail" appearance="fill" class="form-p-1">
+          <mat-icon matPrefix class="prefix">account_circle</mat-icon>
+          <mat-label>E-mail</mat-label>
+          <input matInput formControlName="email" type="text" required>
+          <mat-error *ngIf="form.hasError('required','email')">
+            Enter your e-mail.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field hintLabel="Enter your age" appearance="fill" class="form-p-1">
+          <mat-icon matPrefix class="prefix">account_circle</mat-icon>
+          <mat-label>Age</mat-label>
+          <input matInput formControlName="age" type="number" required>
+          <mat-error *ngIf="form.hasError('required','age')">
+            Enter your age.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" hintLabel="Enter your gender" class="form-p-1">
+          <mat-icon matPrefix class="prefix">account_circle</mat-icon>
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value=0>Male</mat-option>
+            <mat-option value=1>Female</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.hasError('required','gender')">
+            Enter your age.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field hintLabel="Enter a password" appearance="fill" class="form-p-1">
+          <mat-icon matPrefix class="prefix">vpn_key</mat-icon>
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" #password required>
+          <mat-error *ngIf="form.hasError('required','password')">
+            You must enter a password.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field hintLabel="Confirm your password" appearance="fill" class="form-p-1">
+          <mat-icon matPrefix class="prefix">vpn_key</mat-icon>
+          <mat-label>Confirm password</mat-label>
+          <input matInput type="password" [errorStateMatcher]="matcher" formControlName="confirmPassword"
+            #confirmPassword>
+          <mat-error *ngIf="form.hasError('notSame')">
+            Password don´t match
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="modal-btn" type="submit" [disabled]="!form.valid">Save</button>
+      </form>
+    </div>
+
+
+  </div>
+
+  <info-menu class="success" *ngSwitchCase="Status.success"></info-menu>
+
+</ng-container>
