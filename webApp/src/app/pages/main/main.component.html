@@ -2,9 +2,14 @@
   <div class="loading" *ngSwitchCase="Status.loading">
     <mat-spinner [diameter]="40"></mat-spinner>
   </div>
-  <div class="loaded"  *ngSwitchCase="Status.loaded">
+  <div class="loaded" *ngSwitchCase="Status.loaded">
     <div class="image-container mat-elevation-z5"></div>
     <div class="card mat-elevation-z6">
     </div>
+  </div>
+
+  <div class="empty" *ngSwitchCase="Status.empty" fxLayout="column" fxLayoutAlign="center center">
+    <mat-icon>help_outline</mat-icon>
+    <span>No pets available</span>
   </div>
 </div>

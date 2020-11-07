@@ -33,7 +33,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import { MatRippleModule } from '@angular/material/core';
 @NgModule({
   declarations: [],
   imports: [
@@ -50,6 +50,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSelectModule,
     MatSliderModule,
     MatSlideToggleModule,
+    MatRippleModule,
     MatMenuModule,
     MatSidenavModule,
     MatToolbarModule,
@@ -80,6 +81,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatInputModule,
     MatAutocompleteModule,
     MatDatepickerModule,
+    MatRippleModule,
     MatFormFieldModule,
     MatRadioModule,
     MatSelectModule,

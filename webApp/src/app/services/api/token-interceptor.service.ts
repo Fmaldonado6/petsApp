@@ -8,7 +8,7 @@ export class TokenInterceptorService {
 
   intercept(req, next) {
     let token = req;
-
+    console.log(token)
     if (this.authService.getToken) {
       token = req.clone({
         setHeaders: {
@@ -17,7 +17,7 @@ export class TokenInterceptorService {
       })
     }
 
-    return next.handle(req)
+    return next.handle(token)
 
   }
 

@@ -1,4 +1,6 @@
+import { PetsService } from './../../services/api/pets/pets.service';
 import { Component, OnInit } from '@angular/core';
+import { Pet } from 'src/app/shared/models/dataModels';
 
 @Component({
   selector: 'app-main',
@@ -8,11 +10,28 @@ import { Component, OnInit } from '@angular/core';
 export class MainPage implements OnInit {
   Status = Status;
 
-  currentStatus = Status.loaded
+  currentStatus = Status.loading
 
-  constructor() { }
+  pets: Pet[]
+
+  constructor(private petsService: PetsService) {
+    this.getPets();
+  }
 
   ngOnInit(): void {
+
+  }
+
+  getPets() {
+    this.petsService.getPets().subscribe(pets => {
+      this.pets = pets;
+
+      if (this.pets.length == 0)
+        return this.currentStatus = Status.empty
+
+      this.currentStatus = Status.loaded
+
+    })
   }
 
 }
@@ -20,5 +39,6 @@ export class MainPage implements OnInit {
 enum Status {
   loading = 0,
   loaded,
-  error
+  error,
+  empty
 }

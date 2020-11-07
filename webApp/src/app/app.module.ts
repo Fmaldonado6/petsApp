@@ -14,6 +14,7 @@ import { TokenInterceptorService } from './services/api/token-interceptor.servic
 import { LoggedInComponent } from './components/layout/logged-in/logged-in.component';
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { MainPage } from './pages/main/main.component';
+import { AccountPage } from './pages/account/account.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MainPage } from './pages/main/main.component';
     InfoMenuComponent,
     LoggedInComponent,
     NavbarComponent,
-    MainPage
+    MainPage,
+    AccountPage
   ],
   imports: [
     BrowserModule,
