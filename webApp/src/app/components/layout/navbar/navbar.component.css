@@ -1,0 +1,24 @@
+span {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 25px;
+}
+
+
+
+mat-toolbar {
+  background-color: transparent;
+}
+
+.image-container {
+  position: absolute;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  right: 20px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InfoMenuComponent } from './components/modals/info-menu/info-menu.component';
 import { TokenInterceptorService } from './services/api/token-interceptor.service';
 import { LoggedInComponent } from './components/layout/logged-in/logged-in.component';
+import { NavbarComponent } from './components/layout/navbar/navbar.component';
+import { MainPage } from './pages/main/main.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { LoggedInComponent } from './components/layout/logged-in/logged-in.compo
     LoginComponent,
     AddUserModal,
     InfoMenuComponent,
-    LoggedInComponent
+    LoggedInComponent,
+    NavbarComponent,
+    MainPage
   ],
   imports: [
     BrowserModule,
