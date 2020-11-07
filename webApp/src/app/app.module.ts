@@ -21,13 +21,9 @@ import { MainPage } from './pages/main/main.component';
     LoginComponent,
     AddUserModal,
     InfoMenuComponent,
-<<<<<<< HEAD
     LoggedInComponent,
     NavbarComponent,
     MainPage
-=======
-    LoggedInComponent
->>>>>>> abdb13087804d7d2f4e5c233d48198eaf440b679
   ],
   imports: [
     BrowserModule,
