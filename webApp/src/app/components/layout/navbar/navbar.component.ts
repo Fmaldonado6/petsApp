@@ -1,6 +1,10 @@
+import { environment } from './../../../../environments/environment';
+import { UserService } from './../../../services/api/users/user.service';
+import { PicturesService } from './../../../services/api/pictures/pictures.service';
 import { User } from './../../../shared/models/dataModels';
 import { AuthService } from './../../../services/api/auth/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'navbar',
@@ -8,18 +12,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  @Output() signOutEvent = new EventEmitter();
+  userInfo: User = new User();
+  basePath = environment.base_url
+  constructor(private userService: UserService, private picturesService: PicturesService) {
 
-  userInfo: User;
-
-  constructor(private authService: AuthService) { }
+  }
 
   ngOnInit(): void {
+    this.userInfo = this.userService.loggedUser
 
-    let token = this.authService.getTokenInfo()
+    this.userService.getMyInfo().subscribe(user => {
+      this.userInfo = user
+      if (this.userInfo.profilePictureId != null)
+        this.picturesService.getPicture(this.userInfo.profilePictureId).subscribe(pic => {
+          this.userInfo.profilePicture = pic
+        })
+    });
+  }
 
-    this.userInfo = JSON.parse(token.sub) as User;
+  signOut() {
+    this.signOutEvent.emit();
 
-    console.log(this.userInfo)
   }
 
 }

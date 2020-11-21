@@ -5,6 +5,8 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import javax.persistence.Column;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -32,6 +34,10 @@ public class Picture {
     @JsonInclude
     @Transient
     private List<Comment> comments;
+
+    @JsonInclude
+    @Transient
+    private String pictureData;
 
     public String getId() {
         return this.id;

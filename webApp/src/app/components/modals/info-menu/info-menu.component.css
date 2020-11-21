@@ -1,0 +1,21 @@
+.icon-container {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  color: rgb(80, 80, 80);
+}
+
+mat-icon {
+  transform: scale(2);
+  padding: 5px;
+  border-radius: 100%;
+
+}
+
+button {
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}

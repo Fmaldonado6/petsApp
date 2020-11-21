@@ -1,16 +1,21 @@
 package com.fmaldonado.petsApp.webApi.controllers;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.http.HttpStatus;
 import com.fmaldonado.petsApp.core.domain.Pet;
+import com.fmaldonado.petsApp.core.domain.Picture;
+import com.fmaldonado.petsApp.core.domain.User;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.fmaldonado.petsApp.core.IUnitOfWork;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,11 +38,48 @@ public class PetsController {
         }
     }
 
+    @DeleteMapping({ "/{id}" })
+    public ResponseEntity deletePet(@PathVariable final String id) {
+        try {
+            final Pet pet = this.unitOfWork.getPets().get(id);
+
+            final List<Picture> pictures = this.unitOfWork.getPictures().getPicturesByPetId(pet.getId());
+
+            for (Picture picture : pictures) {
+                this.unitOfWork.getFiles().deleteFile(picture.getPicture());
+                this.unitOfWork.getPictures().delete(picture.getId());
+            }
+
+            unitOfWork.getPets().delete(id);
+
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping({ "" })
     public ResponseEntity<List<Pet>> getPets() {
         try {
             final List<Pet> returnList = this.unitOfWork.getPets().getAll();
-            return new ResponseEntity<List<Pet>>(returnList, HttpStatus.OK);
+
+            for (Pet pet : returnList) {
+
+                User user = this.unitOfWork.getUsers().get(pet.getOwnerId());
+
+                pet.setOwner(user);
+
+                if (pet.getProfilePictureId() == null)
+                    continue;
+
+                Picture profilePic = this.unitOfWork.getPictures().get(pet.getProfilePictureId());
+
+                pet.setProfilePicture(profilePic);
+
+            }
+
+            return new ResponseEntity<>(returnList, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -48,6 +90,19 @@ public class PetsController {
     public ResponseEntity<Pet> addPet(@RequestBody final Pet pet) {
         try {
             final Pet obj = this.unitOfWork.getPets().save(pet);
+            return new ResponseEntity<Pet>(obj, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping({ "/{id}" })
+    public ResponseEntity<Pet> setProfilePicture(@RequestBody final Pet pet) {
+        try {
+
+            Pet obj = unitOfWork.getPets().save(pet);
+
             return new ResponseEntity<Pet>(obj, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

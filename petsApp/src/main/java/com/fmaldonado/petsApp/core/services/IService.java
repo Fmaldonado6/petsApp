@@ -7,6 +7,7 @@ public interface IService<T, ID extends Serializable> {
 
     T save(final T entity);
 
+
     void delete(final ID id);
 
     T get(final ID id);

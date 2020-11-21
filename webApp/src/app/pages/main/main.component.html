@@ -1,10 +1,19 @@
 <div class="main-container" [ngSwitch]="currentStatus">
   <div class="loading" *ngSwitchCase="Status.loading">
-    <mat-spinner [diameter]="40"></mat-spinner>
+    <mat-spinner color="accent" [diameter]="40"></mat-spinner>
   </div>
-  <div class="loaded" *ngSwitchCase="Status.loaded">
-    <div class="image-container mat-elevation-z5"></div>
-    <div class="card mat-elevation-z6">
+  <div class="loaded" *ngSwitchCase="Status.loaded" swing-stack [stackConfig]="stackConfig"
+    (throwout)="throw($event)">
+
+    <img  *ngFor="let pet of pets;let i = index" 
+      swing-card class="image-container mat-elevation-z5" [src]="'http://localhost:8080/'+pet.profilePicture.picture">
+
+    <div class="card" (click)="openInfo()" matRipple fxLayout="row" fxLayoutAlign="start center">
+      <mat-icon class="pet-icon">pets</mat-icon>
+      <div class="name-container" fxLayout="column" fxLayoutAlign="center start">
+        <span class="subtitle">Name: </span>
+        <span class="title">{{pets[currentPet].name}}</span>
+      </div>
     </div>
   </div>
 

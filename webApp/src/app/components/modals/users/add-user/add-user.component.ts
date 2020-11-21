@@ -1,9 +1,12 @@
-import { UserService } from './../../../../services/api/users/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Types } from './../../info-menu/info-menu.component';
+import { UserService } from 'src/app/services/api/users/user.service';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { BadInput } from 'src/app/shared/errors/errors';
 import { User } from 'src/app/shared/models/dataModels';
+import { Status } from 'src/app/shared/models/Status';
+import { MatDialogRef } from '@angular/material/dialog';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -24,8 +27,10 @@ export class AddUserModal implements OnInit {
   matcher = new MyErrorStateMatcher();
   Status = Status
   currentStatus = Status.loaded
-
-  constructor(private userService: UserService) { }
+  Types = Types
+  @Input() ref;
+  constructor(private userService: UserService,
+    private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -57,7 +62,6 @@ export class AddUserModal implements OnInit {
 
   }
 
-
   checkPasswords(group: FormGroup) {
     let pass = group.controls.password.value;
     let confirmPass = group.controls.confirmPassword.value;
@@ -75,21 +79,24 @@ export class AddUserModal implements OnInit {
     user.password = value.password;
 
     this.userService.createUser(user).subscribe(createdUser => {
-      console.log(createdUser)
+
+      this.currentStatus = Status.completed
+      this.changeDetector.detectChanges();
+    }, (e) => {
+      console.log(e)
+      this.changeDetector.detectChanges();
+      this.currentStatus = Status.error
+
     })
 
   }
 
-  closeModal() {
-
+  close() {
+    if (this.ref instanceof MatDialogRef)
+      this.ref.close()
+    else
+      this.ref.dismiss()
   }
 
 }
 
-export enum Status {
-  loading,
-  loaded,
-  error,
-  repeated,
-  success
-}

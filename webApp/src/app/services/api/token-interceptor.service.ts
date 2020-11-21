@@ -8,8 +8,9 @@ export class TokenInterceptorService {
 
   intercept(req, next) {
     let token = req;
+    if (this.authService.getToken()) {
     console.log(token)
-    if (this.authService.getToken) {
+
       token = req.clone({
         setHeaders: {
           Authorization: `Bearer ${this.authService.getToken()}`

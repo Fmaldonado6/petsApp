@@ -1,0 +1,147 @@
+.dialog {
+  min-width: 400px;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  cursor: default;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+}
+
+.pic {
+  height: 170px;
+  min-height: 170px;
+}
+
+.picture-container{
+  overflow-x: auto;
+}
+
+
+.loaded {
+  width: 100%;
+
+}
+
+.image-container {
+  position: relative;
+  height: 130px;
+  width: 130px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  overflow: hidden;
+  border-radius: 100%;
+
+}
+
+.delete-button{
+  position: absolute;
+  transform: scale(.75);
+  top: -5px;
+  right: -5px;
+  background-color: rgba(0, 0, 0, 0.39);
+  border-radius: 50%;
+}
+
+.pet-image-container{
+  position: relative;
+
+}
+
+.pet-image {
+  margin-top: 10px;
+  object-fit: cover;
+  width: 120px;
+  margin-right: 10px;
+  height: 160px;
+  border-radius: 10px;
+  min-width: 120px;
+  min-height: 160px;
+
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.664);
+  border-radius: 100%;
+  z-index: 10;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .3s ease;
+}
+
+.pet-name {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 25px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.item {
+  margin-top: 20px;
+
+}
+
+.title {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.item span {
+  font-size: 18px;
+}
+
+
+.profile-picture {
+  object-fit: scale-down;
+  position: relative;
+  height: 130px;
+  width: 130px;
+  border-radius: 100%;
+}
+
+.overlay mat-icon {
+  color: rgb(224, 224, 224) !important;
+
+}
+
+
+
+.image-container mat-icon {
+  transform: scale(2.5);
+  color: rgb(92, 92, 92);
+}
+
+@media (max-width: 700px) {
+  .dialog {
+    width: 100%;
+    min-width: 20px;
+    min-height: 80vh;
+
+    max-height: 80vh;
+  }
+
+  .image-container {
+    height: 100px;
+    width: 100px;
+
+
+  }
+
+}

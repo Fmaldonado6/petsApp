@@ -1,6 +1,12 @@
+import { InfoPetComponent } from './../../components/modals/pets/info-pet/info-pet.component';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { MatDialog } from '@angular/material/dialog';
 import { PetsService } from './../../services/api/pets/pets.service';
 import { Component, OnInit } from '@angular/core';
 import { Pet } from 'src/app/shared/models/dataModels';
+import { Status } from 'src/app/shared/models/Status';
+import { StackConfig } from 'angular2-swing';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -9,13 +15,24 @@ import { Pet } from 'src/app/shared/models/dataModels';
 })
 export class MainPage implements OnInit {
   Status = Status;
-
+  Math = Math
   currentStatus = Status.loading
 
   pets: Pet[]
 
-  constructor(private petsService: PetsService) {
+  currentPet = 0
+  stackConfig: StackConfig;
+  constructor(
+    private petsService: PetsService,
+    private dialog: MatDialog,
+
+    private bottomSheet: MatBottomSheet
+  ) {
     this.getPets();
+    this.stackConfig = {
+
+      minThrowOutDistance: 2000
+    };
   }
 
   ngOnInit(): void {
@@ -23,22 +40,42 @@ export class MainPage implements OnInit {
   }
 
   getPets() {
+    this.currentStatus = Status.loading
     this.petsService.getPets().subscribe(pets => {
       this.pets = pets;
-
       if (this.pets.length == 0)
         return this.currentStatus = Status.empty
 
+      this.currentPet = this.pets.length - 1
       this.currentStatus = Status.loaded
 
     })
   }
 
+  openInfo() {
+    let width = window.innerWidth
+
+    if (width < 700) {
+      const dialog = this.bottomSheet.open(InfoPetComponent)
+      dialog.instance.petInfo = this.pets[this.currentPet]
+    } else {
+      const dialog = this.dialog.open(InfoPetComponent)
+      dialog.componentInstance.petInfo = this.pets[this.currentPet]
+    }
+
+  }
+
+  signOut(){
+
+  }
+
+  throw(element) {
+    if (this.currentPet > 0)
+      this.currentPet--
+    else
+      this.getPets();
+    element.target.remove()
+  }
+
 }
 
-enum Status {
-  loading = 0,
-  loaded,
-  error,
-  empty
-}

@@ -1,0 +1,12 @@
+.empty mat-icon {
+  transform: scale(3);
+  margin-top: 20px;
+  margin-bottom: 30px;
+  color: rgb(211, 211, 211);
+
+}
+
+.empty span {
+  font-size: 20px;
+  color: rgb(199, 199, 199);
+}

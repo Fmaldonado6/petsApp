@@ -1,4 +1,13 @@
-<login *ngIf="!loggedIn"></login>
-<div class="container">
-  <logged-in *ngIf="loggedIn"></logged-in>
-</div>
+<ng-container [ngSwitch]="currentSatus">
+  <div class="loading" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="40" color="accent"></mat-spinner>
+  </div>
+
+  <div class="loaded" *ngSwitchCase="Status.loaded">
+    <login (loginEvent)="login()"  *ngIf="!loggedIn"></login>
+    <div class="container">
+      <logged-in (signOutEvent)="signOut()" *ngIf="loggedIn"></logged-in>
+    </div>
+  </div>
+
+</ng-container>

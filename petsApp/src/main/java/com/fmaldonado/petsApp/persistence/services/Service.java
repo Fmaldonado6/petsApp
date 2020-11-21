@@ -14,6 +14,7 @@ public abstract class Service<T, ID extends Serializable> implements IService<T,
         return (T) this.getDao().save(entity);
     }
 
+
     @Override
     public void delete(final ID id) {
         this.getDao().deleteById(id);

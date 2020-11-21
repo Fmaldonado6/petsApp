@@ -15,7 +15,11 @@ import { LoggedInComponent } from './components/layout/logged-in/logged-in.compo
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { MainPage } from './pages/main/main.component';
 import { AccountPage } from './pages/account/account.component';
-
+import { EmptyComponent } from './components/shared/empty/empty.component';
+import { AddPetModal } from './components/modals/pets/add-pet/add-pet.component';
+import { SwingModule } from 'angular2-swing';
+import { InfoPetComponent } from './components/modals/pets/info-pet/info-pet.component';
+import { ConfirmComponent } from './components/modals/confirm/confirm.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +29,11 @@ import { AccountPage } from './pages/account/account.component';
     LoggedInComponent,
     NavbarComponent,
     MainPage,
-    AccountPage
+    AccountPage,
+    EmptyComponent,
+    AddPetModal,
+    InfoPetComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +41,7 @@ import { AccountPage } from './pages/account/account.component';
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
-
+    SwingModule,
     FlexLayoutModule
   ],
   providers: [

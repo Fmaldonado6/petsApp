@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping({ "/api/v1/auth" })
-@CrossOrigin({ "*" })
+@CrossOrigin
 public class AuthController {
 
     @Autowired
@@ -37,10 +37,15 @@ public class AuthController {
     public ResponseEntity<String> login(@RequestBody final User user) {
         try {
             final User foundUser = this.unitOfWork.getUsers().findByEmail(user.getEmail());
+
+            System.out.println(foundUser.getEmail());
+
             if (foundUser == null) {
                 return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             }
-            if (!this.passwordEncoder.matches((CharSequence) user.getPassword(), foundUser.getPassword())) {
+            if (!this.passwordEncoder.matches(user.getPassword(), foundUser.getPassword())) {
+                System.out.println(user.getPassword());
+
                 return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
             }
             foundUser.setPassword("");

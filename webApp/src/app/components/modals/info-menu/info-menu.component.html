@@ -1,1 +1,8 @@
-<p>info-menu works!</p>
+<div class="container" fxLayout="column" fxLayoutAlign="start center">
+  <div class="icon-container">
+    <mat-icon [ngStyle]="{'border': '2px solid '+colors[type],'color':colors[type]}">{{icons[type]}}</mat-icon>
+  </div>
+  <h2>{{title}}</h2>
+  <button (click)="buttonClicked()" mat-raised-button
+    [ngStyle]="{'background-color':buttonColors[type]}">{{accept}}</button>
+</div>

@@ -5,6 +5,8 @@ import com.fmaldonado.petsApp.core.services.IPicturesService;
 import com.fmaldonado.petsApp.core.services.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.fmaldonado.petsApp.core.services.ICommentsService;
+import com.fmaldonado.petsApp.core.services.IFileService;
+
 import org.springframework.stereotype.Service;
 import com.fmaldonado.petsApp.core.IUnitOfWork;
 
@@ -19,6 +21,9 @@ public class UnitOfWork implements IUnitOfWork {
     private IPicturesService picturesService;
     @Autowired
     private IPetsService petsService;
+
+    @Autowired
+    private IFileService fileService;
 
     @Override
     public ICommentsService getComments() {
@@ -38,5 +43,10 @@ public class UnitOfWork implements IUnitOfWork {
     @Override
     public IPicturesService getPictures() {
         return this.picturesService;
+    }
+
+    @Override
+    public IFileService getFiles() {
+        return this.fileService;
     }
 }

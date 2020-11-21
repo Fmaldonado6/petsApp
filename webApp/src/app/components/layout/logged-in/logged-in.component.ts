@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'logged-in',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoggedInComponent implements OnInit {
 
+  @Output() signOutEvent = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  signOut(){
+    this.signOutEvent.emit();
+  }
+  
 }

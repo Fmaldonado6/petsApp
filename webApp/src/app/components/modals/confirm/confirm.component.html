@@ -1,0 +1,9 @@
+ <div class="dialog">
+   <span class="mat-title title">{{modalData.title}}</span>
+   <p class="mat-body text">{{modalData.text}}
+   </p>
+   <div class="buttons">
+     <button mat-button color="primary" (click)="closeDialog()">{{modalData.cancel}}</button>
+     <button mat-button color="primary" (click)="accept()">{{modalData.confirm}}</button>
+   </div>
+ </div>

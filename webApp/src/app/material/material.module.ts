@@ -34,6 +34,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRippleModule } from '@angular/material/core';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -67,6 +69,7 @@ import { MatRippleModule } from '@angular/material/core';
     MatProgressBarModule,
     MatDialogModule,
     MatTooltipModule,
+    MatBottomSheetModule,
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
@@ -83,6 +86,7 @@ import { MatRippleModule } from '@angular/material/core';
     MatDatepickerModule,
     MatRippleModule,
     MatFormFieldModule,
+    MatBottomSheetModule,
     MatRadioModule,
     MatSelectModule,
     MatSliderModule,

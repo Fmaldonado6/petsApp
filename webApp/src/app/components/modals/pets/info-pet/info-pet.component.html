@@ -1,0 +1,58 @@
+<div class="dialog" [ngSwitch]="currentStatus">
+  <div class="loading" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="40"></mat-spinner>
+  </div>
+  <div class="loaded" *ngSwitchCase="Status.loaded">
+    <div class="image-container mat-elevation-z4">
+      <div class="overlay">
+        <mat-icon>add</mat-icon>
+      </div>
+      <img class="profile-picture" *ngIf="petInfo.profilePicture" [src]="basePath + petInfo.profilePicture.picture">
+      <mat-icon *ngIf="!petInfo.profilePicture">pets</mat-icon>
+    </div>
+    <h2 class="pet-name">{{petInfo.name}}</h2>
+    <mat-divider></mat-divider>
+    <div class="info" fxLayout="column">
+      <div class="item" fxLayout="column">
+        <span class="title">Species: </span>
+        <span>{{petInfo.type}}</span>
+      </div>
+      <div *ngIf="petInfo.breed" class="item" fxLayout="column">
+        <span class="title">Breed: </span>
+        <span>{{petInfo.breed}}</span>
+      </div>
+      <div *ngIf="petInfo.description" class="item" fxLayout="column">
+        <span class="title">Description: </span>
+        <span>{{petInfo.description}}</span>
+      </div>
+      <div class="item" fxLayout="column">
+        <span class="title">Owner: </span>
+        <span>{{petInfo.owner.name}}</span>
+      </div>
+      <input #file type="file" (change)="uploadPicture($event)" fxShow="false">
+      <div class="item" fxLayout="column">
+        <div class="title-container" fxLayout="row" fxLayoutAlign="space-between">
+          <span class="title">Pictures: </span>
+          <button *ngIf="owner" (click)="file.click($event)" mat-icon-button color="primary">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="picture-container" [ngSwitch]="picturesStatus">
+          <div class="loading pic" *ngSwitchCase="Status.loading">
+            <mat-spinner [diameter]="40"></mat-spinner>
+          </div>
+
+          <div class="loaded" *ngSwitchCase="Status.loaded" fxLayout="row">
+            <div class="pet-image-container" *ngFor="let picture of petInfo.pictures">
+              <button (click)="delete(picture)" class="delete-button"
+                *ngIf="owner && petInfo.profilePictureId != picture.id" mat-icon-button color="accent">
+                <mat-icon>close</mat-icon>
+              </button>
+              <img class="pet-image mat-elevation-z4" [src]="basePath+picture.picture">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

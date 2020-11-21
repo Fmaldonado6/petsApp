@@ -1,6 +1,7 @@
 package com.fmaldonado.petsApp.webApi.controllers;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.fmaldonado.petsApp.core.domain.Pet;
 import com.fmaldonado.petsApp.core.domain.Picture;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping({ "/api/v1/users" })
-@CrossOrigin({ "http://localhost:4200" })
+@CrossOrigin
 public class UsersController {
 
     @Autowired
@@ -31,8 +32,10 @@ public class UsersController {
     public ResponseEntity<List<User>> getAll() {
         try {
             final List<User> list = this.unitOfWork.getUsers().getAll();
-            return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+            return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
+
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -41,12 +44,30 @@ public class UsersController {
     public ResponseEntity<User> getById(@PathVariable final String id) {
         try {
             final User obj = this.unitOfWork.getUsers().get(id);
-            final Picture profilePic = this.unitOfWork.getPictures().get(obj.getProfilePictureId());
             final List<Pet> pets = this.unitOfWork.getPets().getPetsByOwnerId(obj.getId());
+
+            for (Pet pet : pets) {
+
+                if (pet.getProfilePictureId() == null)
+                    continue;
+
+                Picture profilePic = this.unitOfWork.getPictures().get(pet.getProfilePictureId());
+                pet.setProfilePicture(profilePic);
+            }
+
             obj.setPets(pets);
+
+            obj.setPassword("");
+
+            if (obj.getProfilePictureId() == null)
+                return new ResponseEntity<>(obj, HttpStatus.OK);
+
+            final Picture profilePic = this.unitOfWork.getPictures().get(obj.getProfilePictureId());
             obj.setProfilePicture(profilePic);
-            return new ResponseEntity<User>(obj, HttpStatus.OK);
+            return new ResponseEntity<>(obj, HttpStatus.OK);
+
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -56,7 +77,38 @@ public class UsersController {
         try {
             user.setPassword(this.passwordEncoder.encode((CharSequence) user.getPassword()));
             final User obj = this.unitOfWork.getUsers().save(user);
-            return new ResponseEntity<User>(obj, HttpStatus.OK);
+            obj.setPassword("");
+            return new ResponseEntity<>(obj, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping({ "/{id}" })
+    public ResponseEntity<User> update(@RequestBody final User user) {
+        try {
+
+            final User oldUser = this.unitOfWork.getUsers().get(user.getId());
+
+            if (!user.getPassword().isEmpty() && user.getPassword() != null)
+                user.setPassword(this.passwordEncoder.encode((CharSequence) user.getPassword()));
+            else
+                user.setPassword(oldUser.getPassword());
+
+            if (oldUser.getProfilePictureId() != null
+                    && !oldUser.getProfilePictureId().equals(user.getProfilePictureId())) {
+                Picture pic = unitOfWork.getPictures().get(oldUser.getProfilePictureId());
+
+                unitOfWork.getFiles().deleteFile(pic.getPicture());
+                unitOfWork.getPictures().delete(oldUser.getProfilePictureId());
+
+            }
+
+            final User obj = this.unitOfWork.getUsers().save(user);
+            obj.setPassword("");
+
+            return new ResponseEntity<>(obj, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

@@ -25,6 +25,10 @@ export class AuthService extends DataService {
     return localStorage.getItem('token-pets-app')
   }
 
+  signOut() {
+    localStorage.removeItem('token-pets-app')
+  }
+
   getTokenInfo() {
     let token = this.getToken();
     let base64Url = token.split('.')[1];

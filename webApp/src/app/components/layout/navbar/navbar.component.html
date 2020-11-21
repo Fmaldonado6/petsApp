@@ -1,7 +1,20 @@
 <mat-toolbar>
-  <span>Pets App</span>
+ 
+  <span routerLink="/">Pets App</span>
   <div class="space"></div>
-  <div class="image-container mat-elevation-z2" [routerLink]="'account/'+userInfo.id" matRipple>
-    <mat-icon>perm_identity</mat-icon>
+  <div class="image-container mat-elevation-z2" [matMenuTriggerFor]="menu" matRipple>
+    <mat-icon *ngIf="!userInfo.profilePicture">perm_identity</mat-icon>
+    <img *ngIf="userInfo.profilePicture " [src]="basePath+userInfo.profilePicture.picture">
   </div>
 </mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item [routerLink]="'account/'+userInfo.id">
+    <mat-icon>perm_identity</mat-icon>
+    My profile
+  </button>
+  <button mat-menu-item (click)="signOut()">
+    <mat-icon>power_settings_new</mat-icon>
+    Sign out
+  </button>
+</mat-menu>

@@ -1,0 +1,179 @@
+.image-container {
+  position: relative;
+  width: 125px;
+  height: 125px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 100%;
+  margin-right: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background{
+  background-color: white;
+  position: fixed;
+  width: 100vw;
+  height: calc(100vh - 56px);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.image-container img{
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+  border-radius: 100%;
+
+}
+
+.overlay {
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.664);
+  border-radius: 100%;
+  z-index: 10;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .3s ease;
+}
+
+
+
+.overlay mat-icon {
+  color: rgb(224, 224, 224) !important;
+
+}
+
+.overlay:hover {
+  opacity: 1;
+}
+
+.image-container mat-icon {
+  transform: scale(3);
+  color: rgb(80, 80, 80);
+}
+
+.header-container {
+  margin-top: 50px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid rgb(179, 179, 179);
+}
+
+.pet {
+  margin-top: 15px;
+  margin-bottom: 25px;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.delete-button{
+  position: absolute;
+  transform: scale(.75);
+  top: -5px;
+  right: -5px;
+  background-color: rgba(0, 0, 0, 0.39);
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.margin-fix {
+  margin-left: auto;
+}
+
+.pet img:hover{
+  filter: brightness(.5);
+
+}
+
+.pet img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 100%;
+  transition: filter .3s ease;
+
+}
+
+.pet span{
+  margin-top: 10px;
+  font-size: 17px;
+}
+
+
+.name {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.pets-button {
+  cursor: default;
+  margin-right: 20px;
+  border: 1px solid rgb(99, 138, 245);
+  border-radius: 15px;
+  min-width: 100px;
+  height: 25px;
+  text-align: center;
+  color: rgb(99, 138, 245);
+  font-weight: 500;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.add-button {
+  cursor: pointer;
+  border-radius: 100%;
+  color: rgb(99, 138, 245);
+
+}
+
+.empty {
+  margin-top: 20px;
+}
+
+
+.pets-button mat-icon {
+  transform: scale(.85);
+  margin-bottom: 1px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+@media(max-width:700px) {
+  .image-container {
+    width: 100px;
+    height: 100px;
+    min-width: 100px;
+    min-height: 100px;
+  margin-right: 20px;
+
+  }
+
+  .header-container {
+    padding-bottom: 20px;
+  }
+
+  .pet {
+    width: 100px;
+    height: 100px;
+  }
+}

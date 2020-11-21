@@ -20,6 +20,8 @@ export class Picture {
     comments: Comment[]
 }
 
+
+
 export class Pet {
     id: string;
     ownerId: string;

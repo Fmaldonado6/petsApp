@@ -1,5 +1,10 @@
 package com.fmaldonado.petsApp.webApi;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fmaldonado.petsApp.webApi.utils.JWTAuthorizationFilter;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +21,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.resource.PathResourceResolver;
 
 @SpringBootApplication
 @ComponentScan({ "com.fmaldonado.petsApp.persistence", "com.fmaldonado.petsApp.core", "com.fmaldonado.petsApp.webApi" })
@@ -42,13 +52,37 @@ public class PetsAppApplication {
     @Configuration
     class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+        @Override
         protected void configure(final HttpSecurity http) throws Exception {
             http.cors();
             http.csrf().disable()
                     .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                     .authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/auth").permitAll()
-                    .antMatchers(HttpMethod.POST, "/api/v1/users").permitAll().anyRequest().authenticated();
+                    .antMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
+                    .antMatchers("/media/**").permitAll().anyRequest().authenticated();
 
         }
     }
+
+    @Configuration
+    class MvcConfig implements WebMvcConfigurer {
+
+        @Override
+        public void addResourceHandlers(ResourceHandlerRegistry registry) {
+            exposeDirectory("media/profile", registry);
+            exposeDirectory("media/", registry);
+
+        }
+
+        private void exposeDirectory(String dirName, ResourceHandlerRegistry registry) {
+            Path uploadDir = Paths.get(dirName);
+            String uploadPath = uploadDir.toFile().getAbsolutePath();
+
+            if (dirName.startsWith("../"))
+                dirName = dirName.replace("../", "");
+
+            registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/" + uploadPath + "/");
+        }
+    }
+
 }
