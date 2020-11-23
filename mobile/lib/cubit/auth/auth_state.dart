@@ -1,0 +1,26 @@
+import 'package:flutter/cupertino.dart';
+import 'package:mobile/models/models.dart';
+
+@immutable
+abstract class AuthState {
+  const AuthState();
+}
+
+class AuthLoading extends AuthState {
+  const AuthLoading();
+}
+
+class AuthInitial extends AuthState {
+  const AuthInitial();
+}
+
+class AuthCompleted extends AuthState {
+  final User user;
+  const AuthCompleted(this.user);
+}
+
+class AuthError extends AuthState {
+  final String error;
+
+  const AuthError(this.error);
+}

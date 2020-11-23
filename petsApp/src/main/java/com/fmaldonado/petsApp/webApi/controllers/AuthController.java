@@ -38,19 +38,15 @@ public class AuthController {
         try {
             final User foundUser = this.unitOfWork.getUsers().findByEmail(user.getEmail());
 
-            System.out.println(foundUser.getEmail());
-
-            if (foundUser == null) {
+            if (foundUser == null)
                 return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-            }
-            if (!this.passwordEncoder.matches(user.getPassword(), foundUser.getPassword())) {
-                System.out.println(user.getPassword());
 
+            if (!this.passwordEncoder.matches(user.getPassword(), foundUser.getPassword()))
                 return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
-            }
+
             foundUser.setPassword("");
             final String token = this.getJWTToken(foundUser);
-            return new ResponseEntity<String>(token, HttpStatus.OK);
+            return new ResponseEntity<>(token, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

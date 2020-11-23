@@ -31,7 +31,7 @@ public class PetsController {
     public ResponseEntity<Pet> getPet(@PathVariable final String id) {
         try {
             final Pet pet = this.unitOfWork.getPets().get(id);
-            return new ResponseEntity<Pet>(pet, HttpStatus.OK);
+            return new ResponseEntity<>(pet, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

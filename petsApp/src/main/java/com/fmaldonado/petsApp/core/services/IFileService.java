@@ -1,6 +1,5 @@
 package com.fmaldonado.petsApp.core.services;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 public interface IFileService {

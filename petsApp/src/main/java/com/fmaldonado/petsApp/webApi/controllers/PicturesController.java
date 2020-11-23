@@ -1,7 +1,6 @@
 package com.fmaldonado.petsApp.webApi.controllers;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.fmaldonado.petsApp.core.domain.Comment;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.http.HttpStatus;
 import com.fmaldonado.petsApp.core.domain.Picture;
 
-import java.io.File;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 
 @RestController
@@ -87,8 +84,6 @@ public class PicturesController {
         try {
 
             token = token.split(" ")[1];
-
-            System.out.println(token);
 
             Claims claims = (Claims) Jwts.parser().setSigningKey(JWTAuthorizationFilter.SECRET.getBytes()).parse(token)
                     .getBody();
