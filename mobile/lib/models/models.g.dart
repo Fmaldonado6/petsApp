@@ -31,8 +31,8 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'password': instance.password,
       'age': instance.age,
       'gender': instance.gender,
-      'profilePicture': instance.profilePicture,
-      'pets': instance.pets,
+      'profilePicture': instance.profilePicture?.toJson(),
+      'pets': instance.pets?.map((e) => e?.toJson())?.toList(),
     };
 
 Picture _$PictureFromJson(Map<String, dynamic> json) {
@@ -51,7 +51,7 @@ Map<String, dynamic> _$PictureToJson(Picture instance) => <String, dynamic>{
       'ownerId': instance.ownerId,
       'petId': instance.petId,
       'picture': instance.picture,
-      'owner': instance.owner,
+      'owner': instance.owner?.toJson(),
     };
 
 Pet _$PetFromJson(Map<String, dynamic> json) {
@@ -62,6 +62,7 @@ Pet _$PetFromJson(Map<String, dynamic> json) {
     ..profilePictureId = json['profilePictureId'] as String
     ..breed = json['breed'] as String
     ..description = json['description'] as String
+    ..type = json['type'] as String
     ..age = json['age'] as int
     ..likes = json['likes'] as int
     ..dislikes = json['dislikes'] as int
@@ -85,11 +86,12 @@ Map<String, dynamic> _$PetToJson(Pet instance) => <String, dynamic>{
       'profilePictureId': instance.profilePictureId,
       'breed': instance.breed,
       'description': instance.description,
+      'type': instance.type,
       'age': instance.age,
       'likes': instance.likes,
       'dislikes': instance.dislikes,
       'gender': instance.gender,
-      'pictures': instance.pictures,
-      'profilePicture': instance.profilePicture,
-      'owner': instance.owner,
+      'pictures': instance.pictures?.map((e) => e?.toJson())?.toList(),
+      'profilePicture': instance.profilePicture?.toJson(),
+      'owner': instance.owner?.toJson(),
     };

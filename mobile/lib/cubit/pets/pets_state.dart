@@ -29,3 +29,7 @@ class PetsError extends PetsState {
 class PetsEmpty extends PetsState {
   const PetsEmpty();
 }
+
+class PetsForm extends PetsState {
+  const PetsForm();
+}

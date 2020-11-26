@@ -28,7 +28,9 @@ dependencies:
   injectable: 
   get_it: ^5.0.1
   flutter_bloc: ^6.0.5
-  
+  image_picker:
+  dio:
+  provider: ^4.3.2+2
   json_serializable: ^3.5.0
   http: any
 

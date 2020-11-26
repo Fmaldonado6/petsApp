@@ -43,13 +43,17 @@ public class PetsController {
         try {
             final Pet pet = this.unitOfWork.getPets().get(id);
 
-            final List<Picture> pictures = this.unitOfWork.getPictures().getPicturesByPetId(pet.getId());
+            try {
+                final List<Picture> pictures = this.unitOfWork.getPictures().getPicturesByPetId(pet.getId());
 
-            for (Picture picture : pictures) {
-                this.unitOfWork.getFiles().deleteFile(picture.getPicture());
-                this.unitOfWork.getPictures().delete(picture.getId());
+                for (Picture picture : pictures) {
+                    this.unitOfWork.getFiles().deleteFile(picture.getPicture());
+                    this.unitOfWork.getPictures().delete(picture.getId());
+
+                }
+            } catch (Exception e) {
+                System.out.println("File not found");
             }
-
             unitOfWork.getPets().delete(id);
 
             return new ResponseEntity<>(null, HttpStatus.OK);
@@ -98,15 +102,29 @@ public class PetsController {
     }
 
     @PutMapping({ "/{id}" })
-    public ResponseEntity<Pet> setProfilePicture(@RequestBody final Pet pet) {
+    public ResponseEntity<Pet> updatePet(@RequestBody final Pet pet) {
         try {
+
+            Pet oldPet = unitOfWork.getPets().get(pet.getId());
+
+            if (pet.getLikes() < oldPet.getLikes()) {
+                pet.setLikes(oldPet.getLikes() + 1);
+            }
+
+            if (pet.getDislikes() < oldPet.getDislikes()) {
+                pet.setLikes(oldPet.getDislikes() + 1);
+
+            }
+            System.out.println(oldPet.getLikes());
+            System.out.println(pet.getLikes());
 
             Pet obj = unitOfWork.getPets().save(pet);
 
-            return new ResponseEntity<Pet>(obj, HttpStatus.OK);
+            return new ResponseEntity<>(obj, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }

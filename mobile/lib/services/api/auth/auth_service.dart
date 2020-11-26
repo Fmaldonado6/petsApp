@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/src/client.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobile/app_config.dart';
 import 'package:mobile/models/models.dart';
+import 'package:mobile/services/api/users/user_service.dart';
 import 'package:mobile/services/data_service.dart';
 
 @injectable
@@ -15,8 +17,11 @@ class AuthService extends DataService {
 
   AuthService(AppConfig config, this._secureStorage) : super(config);
 
-  Future<dynamic> login(User user) {
-    return this.post("/auth", user);
+  Future<dynamic> login(User user) async {
+    Response response = await dio.post(apiUrl + "/auth", data: user);
+
+
+    return response.data;
   }
 
   Future<User> getTokenInfo(String token) async {
@@ -27,6 +32,11 @@ class AuthService extends DataService {
     final map = json.decode(resp)["sub"];
     final user = User.fromJson(jsonDecode(map));
     return user;
+  }
+
+  Future<void> signOut() async {
+    await _secureStorage.delete(key: "refresh_token");
+    UsersService.loggedUserInfo = null;
   }
 
   Future<void> saveToken(String token) async {

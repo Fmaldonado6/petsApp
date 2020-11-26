@@ -3,10 +3,14 @@
     <mat-spinner color="accent" [diameter]="40"></mat-spinner>
   </div>
   <div class="loaded" *ngSwitchCase="Status.loaded" swing-stack [stackConfig]="stackConfig"
-    (throwout)="throw($event)">
+    (dragmove)="addLikeDislike($event)" (dragend)="removeLikeDislike()" (throwout)="throw($event)">
+    <div class="icons" fxLayout="row" fxLayoutAlign="space-between">
+      <mat-icon [ngStyle]="dislike?{'opacity':1} : {'opacity':0}" class="dislike-icon">thumb_down</mat-icon>
+      <mat-icon [ngStyle]="like ?{'opacity':1} : {'opacity':0}" class="like-icon">thumb_up</mat-icon>
 
-    <img  *ngFor="let pet of pets;let i = index" 
-      swing-card class="image-container mat-elevation-z5" [src]="'http://localhost:8080/'+pet.profilePicture.picture">
+    </div>
+    <img *ngFor="let pet of pets;let i = index" swing-card class="image-container mat-elevation-z5"
+      [src]="'http://localhost:8080/'+pet.profilePicture.picture">
 
     <div class="card" (click)="openInfo()" matRipple fxLayout="row" fxLayoutAlign="start center">
       <mat-icon class="pet-icon">pets</mat-icon>
@@ -14,7 +18,22 @@
         <span class="subtitle">Name: </span>
         <span class="title">{{pets[currentPet].name}}</span>
       </div>
+      <div class="likes-dislikes" fxLayout="row" fxLayoutAlign="center center">
+        <div class="likes" fxLayout="column" fxLayoutAlign="center center">
+          <mat-icon class="like-icon">thumb_up</mat-icon>
+          <span *ngIf="!like">{{pets[currentPet].likes}}</span>
+          <span *ngIf="like">{{pets[currentPet].likes+1}}</span>
+
+        </div>
+        <div class="dislikes" fxLayout="column" fxLayoutAlign="center center">
+          <mat-icon class="dislike-icon">thumb_down</mat-icon>
+          <span *ngIf="!dislike">{{pets[currentPet].dislikes}}</span>
+          <span *ngIf="dislike">{{pets[currentPet].dislikes+1}}</span>
+
+        </div>
+      </div>
     </div>
+
   </div>
 
   <div class="empty" *ngSwitchCase="Status.empty" fxLayout="column" fxLayoutAlign="center center">

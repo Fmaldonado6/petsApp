@@ -44,6 +44,7 @@ public class PicturesController {
             final List<Picture> pictures = this.unitOfWork.getPictures().getPicturesByPetId(id);
             return new ResponseEntity<>(pictures, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -96,7 +97,7 @@ public class PicturesController {
 
             Picture savedPicture = new Picture();
 
-            if (petId != null)
+            if (petId != null && !petId.isEmpty())
                 savedPicture.setPetId(petId);
 
             savedPicture.setOwnerId(userInfo.getId());

@@ -23,6 +23,21 @@
   overflow-x: auto;
 }
 
+.like-icon {
+  color: #4caf50;
+}
+
+
+.divider{
+  margin-bottom: 10px;
+}
+
+.dislike-icon {
+
+  color: #f44336;
+}
+
+
 
 .loaded {
   width: 100%;
@@ -36,6 +51,7 @@
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 20px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -11,7 +11,19 @@
       <mat-icon *ngIf="!petInfo.profilePicture">pets</mat-icon>
     </div>
     <h2 class="pet-name">{{petInfo.name}}</h2>
-    <mat-divider></mat-divider>
+    <mat-divider class="divider"></mat-divider>
+    <div class="icons" fxLayout="row" fxLayoutAlign="space-around">
+      <div class="likes" fxLayout="column" fxLayoutAlign="center center">
+        <mat-icon class="like-icon">thumb_up</mat-icon>
+        <span>{{petInfo.likes}}</span>
+
+      </div>
+      <div class="dislikes" fxLayout="column" fxLayoutAlign="center center">
+        <mat-icon class="dislike-icon">thumb_down</mat-icon>
+        <span>{{petInfo.dislikes}}</span>
+
+      </div>
+    </div>
     <div class="info" fxLayout="column">
       <div class="item" fxLayout="column">
         <span class="title">Species: </span>

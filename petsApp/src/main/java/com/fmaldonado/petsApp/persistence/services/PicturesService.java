@@ -21,13 +21,6 @@ public class PicturesService extends Service<Picture, String> implements IPictur
 
     @Override
     public List<Picture> getPicturesByPetId(final String id) {
-        final List<Picture> returnList = new ArrayList<Picture>();
-        this.picturesDao.findAll().forEach(obj -> {
-            if (obj.getPetId().equals(id)) {
-                returnList.add(obj);
-            }
-            return;
-        });
-        return returnList;
+        return picturesDao.findPicturesByPetId(id);
     }
 }

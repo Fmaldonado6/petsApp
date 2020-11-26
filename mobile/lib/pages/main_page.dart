@@ -5,6 +5,7 @@ import 'package:mobile/cubit/auth/auth_state.dart';
 import 'package:mobile/pages/auth/auth_page.dart';
 import 'package:mobile/pages/pets/pets_page.dart';
 import 'package:mobile/services/injection_container.dart';
+import 'package:mobile/shared_widgets/error_widget.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key key}) : super(key: key);
@@ -35,7 +36,6 @@ class _MainPageState extends State<MainPage> {
       child: BlocBuilder<AuthCubit, AuthState>(
         cubit: _authCubit,
         builder: (context, state) {
-
           if (state is AuthLoading)
             return Scaffold(
               body: Center(
@@ -48,6 +48,17 @@ class _MainPageState extends State<MainPage> {
           if (state is AuthCompleted) {
             return PetsPage(userInfo: state.user);
           }
+
+          if (state is AuthError)
+            return Scaffold(
+              body: Center(
+                child: AppErrorWidget(
+                  function: () {
+                    _authCubit.init();
+                  },
+                ),
+              ),
+            );
 
           return AuthPage();
         },

@@ -8,6 +8,9 @@ import { Status } from 'src/app/shared/models/Status';
 import { StackConfig } from 'angular2-swing';
 import { Router } from '@angular/router';
 
+const RIGHT = "Symbol(RIGHT)"
+const LEFT = "Symbol(LEFT)"
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -17,9 +20,9 @@ export class MainPage implements OnInit {
   Status = Status;
   Math = Math
   currentStatus = Status.loading
-
+  like = false;
+  dislike = false;
   pets: Pet[]
-
   currentPet = 0
   stackConfig: StackConfig;
   constructor(
@@ -65,15 +68,46 @@ export class MainPage implements OnInit {
 
   }
 
-  signOut(){
+  signOut() {
 
   }
 
+  removeLikeDislike() {
+    this.like = false;
+    this.dislike = false
+  }
+
+  addLikeDislike(event) {
+
+    if (Math.abs(event.offset) < 20)
+      return;
+
+    if (event.offset > 0) {
+      this.like = true;
+      this.dislike = false
+
+    }
+    else {
+      this.dislike = true
+      this.like = false
+    }
+  }
+
   throw(element) {
-    if (this.currentPet > 0)
-      this.currentPet--
+
+
+    if (element.throwDirection.toString() == RIGHT)
+      this.pets[this.currentPet].likes++;
     else
-      this.getPets();
+      this.pets[this.currentPet].dislikes++;
+
+    this.petsService.updatePet(this.pets[this.currentPet]).subscribe(pet => {
+
+      if (this.currentPet > 0)
+        this.currentPet--
+      else
+        this.getPets();
+    })
     element.target.remove()
   }
 

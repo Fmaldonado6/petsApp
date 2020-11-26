@@ -75,6 +75,12 @@ public class UsersController {
     @PostMapping({ "" })
     public ResponseEntity<User> add(@RequestBody final User user) {
         try {
+
+            User exists = this.unitOfWork.getUsers().findByEmail(user.getEmail());
+
+            if(exists != null)
+                return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+
             user.setPassword(this.passwordEncoder.encode((CharSequence) user.getPassword()));
             final User obj = this.unitOfWork.getUsers().save(user);
             obj.setPassword("");

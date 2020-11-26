@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:mobile/cubit/auth/auth_cubit.dart';
 import 'package:mobile/models/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/pages/auth/register/register_page.dart';
 
 class FormData {
   String email = "";
@@ -28,6 +29,7 @@ class LoginWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextFormField(
+              keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 fillColor: Colors.grey.shade200,
                 prefixIcon: Icon(Icons.account_circle),
@@ -43,6 +45,9 @@ class LoginWidget extends StatelessWidget {
               onChanged: (String val) {
                 form.password = val;
               },
+              enableSuggestions: false,
+              autocorrect: false,
+              obscureText: true,
               decoration: InputDecoration(
                 fillColor: Colors.grey.shade200,
                 filled: true,
@@ -72,7 +77,14 @@ class LoginWidget extends StatelessWidget {
               thickness: 1,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RegisterPage(),
+                  ),
+                );
+              },
               child: Text(
                 "Create Account",
                 style: TextStyle(color: Colors.red),

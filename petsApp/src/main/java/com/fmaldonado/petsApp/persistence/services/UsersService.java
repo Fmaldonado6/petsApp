@@ -21,25 +21,11 @@ public class UsersService extends Service<User, String> implements IUsersService
 
     @Override
     public List<User> findByName(final String name) {
-        final List<User> returnList = new ArrayList<User>();
-        this.usersDao.findAll().forEach(user -> {
-            if (user.getName().equals(name)) {
-                returnList.add(user);
-            }
-            return;
-        });
-        return returnList;
+        return this.usersDao.findByName(name);
     }
 
     @Override
     public User findByEmail(final String email) {
-        User returnUser = null;
-        final List<User> users = (List<User>) this.usersDao.findAll();
-        for (final User user : users) {
-            if (user.getEmail().equals(email)) {
-                returnUser = user;
-            }
-        }
-        return returnUser;
+        return this.usersDao.findByEmail(email);
     }
 }

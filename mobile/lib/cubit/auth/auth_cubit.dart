@@ -27,17 +27,26 @@ class AuthCubit extends Cubit<AuthState> {
 
       final userInfo = await _usersService.getUserInfo(tokenInfo.id);
 
+      UsersService.loggedUserInfo = userInfo;
+
       emit(AuthCompleted(userInfo));
     } catch (e) {
       emit(AuthError("Error $e"));
     }
   }
 
+  Future<void> signOut() async {
+    emit(AuthLoading());
+    await this._authService.signOut();
+    emit(AuthInitial());
+  }
+
   Future<void> login(User user) async {
-    try {
       emit(AuthLoading());
 
       final token = (await _authService.login(user))["token"];
+
+      print(token);
 
       await _authService.saveToken(token);
 
@@ -45,11 +54,9 @@ class AuthCubit extends Cubit<AuthState> {
 
       final userInfo = await _usersService.getUserInfo(tokenInfo.id);
 
+      UsersService.loggedUserInfo = userInfo;
 
       emit(AuthCompleted(userInfo));
-    } catch (e) {
-      print(e);
-      emit(AuthError("Error $e"));
-    }
+  
   }
 }

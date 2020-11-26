@@ -21,13 +21,6 @@ public class PetsService extends Service<Pet, String> implements IPetsService {
 
     @Override
     public List<Pet> getPetsByOwnerId(final String id) {
-        final List<Pet> returnList = new ArrayList<Pet>();
-        this.petsDao.findAll().forEach(obj -> {
-            if (obj.getOwnerId().equals(id)) {
-                returnList.add(obj);
-            }
-            return;
-        });
-        return returnList;
+        return this.petsDao.findPetsByOwnerId(id);
     }
 }

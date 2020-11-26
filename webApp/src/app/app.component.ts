@@ -47,6 +47,8 @@ export class AppComponent {
     this.userService.getUserInfo(userInfo.id).subscribe(user => {
       this.userService.setUser(user)
       this.currentSatus = Status.loaded
+    },()=>{
+      this.signOut();
     })
   }
 

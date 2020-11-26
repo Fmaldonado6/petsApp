@@ -1,14 +1,21 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobile/cubit/pets/pets_state.dart';
 import 'package:mobile/models/models.dart';
+import 'package:mobile/services/api/auth/auth_service.dart';
 import 'package:mobile/services/api/pets/pets_service.dart';
+import 'package:mobile/services/api/pictures/pictures_service.dart';
+import 'package:mobile/services/api/users/user_service.dart';
 
 @injectable
 class PetsCubit extends Cubit<PetsState> {
   final PetsService petsService;
-
-  PetsCubit(this.petsService) : super(PetsLoading());
+  final PicturesService picturesService;
+  final AuthService _authService;
+  PetsCubit(this.petsService, this.picturesService, this._authService)
+      : super(PetsLoading());
 
   Future<void> getPets() async {
     try {
@@ -20,7 +27,41 @@ class PetsCubit extends Cubit<PetsState> {
 
       emit(PetsList(pets));
     } catch (e) {
+      print(e);
       emit(PetsError(e.toString()));
     }
+  }
+
+  void initForm() {
+    emit(PetsForm());
+  }
+
+  bool isOwner(Pet pet) {
+    return UsersService.loggedUserInfo.id == pet.ownerId;
+  }
+
+
+  Future<bool> updatePet(Pet pet) async {
+    try {
+      await this.petsService.updatePet(pet);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<void> addPet(PickedFile file, Pet pet) async {
+    emit(PetsLoading());
+    final newPet = await petsService.addPets(pet);
+    FormData formData = new FormData.fromMap({
+      "file": await MultipartFile.fromFile(file.path,
+          filename: file.path.split("/").last),
+      "petId": newPet.id,
+      "extension": file.path.split(".").last
+    });
+    final savedPicture = await picturesService.addPicture(formData);
+    newPet.profilePictureId = savedPicture.id;
+    final updatedPet = await petsService.updatePet(newPet);
+    emit(PetsCompleted(updatedPet));
   }
 }

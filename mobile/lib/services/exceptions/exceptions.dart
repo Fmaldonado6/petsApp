@@ -10,3 +10,7 @@ class BadInput extends AppError {
 class NotFound extends AppError {
   NotFound(String errorMessage) : super(errorMessage);
 }
+
+class Conflict extends AppError {
+  Conflict(String errorMessage) : super(errorMessage);
+}

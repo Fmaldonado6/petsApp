@@ -19,6 +19,7 @@ export class PetsService extends DataService {
   }
 
   deletePet(pet: Pet) {
+    console.log(pet.id)
     return this.http.delete(`${this.url}/pets/${pet.id}`).pipe(catchError(this.handleError))
   }
 
