@@ -11,12 +11,14 @@ com\fmaldonado\petsApp\webApi\utils\JWTAuthorizationFilter.class
 com\fmaldonado\petsApp\persistence\dao\PicturesDao.class
 com\fmaldonado\petsApp\core\IUnitOfWork.class
 com\fmaldonado\petsApp\core\services\ICommentsService.class
+com\fmaldonado\petsApp\core\services\IFileService.class
 com\fmaldonado\petsApp\core\services\IPicturesService.class
 com\fmaldonado\petsApp\webApi\controllers\CommentsController.class
 com\fmaldonado\petsApp\core\domain\Genders.class
 com\fmaldonado\petsApp\core\domain\Comment.class
 com\fmaldonado\petsApp\core\domain\Picture.class
 com\fmaldonado\petsApp\persistence\services\PetsService.class
+com\fmaldonado\petsApp\webApi\PetsAppApplication$MvcConfig.class
 com\fmaldonado\petsApp\core\domain\Pet.class
 com\fmaldonado\petsApp\persistence\services\UsersService.class
 com\fmaldonado\petsApp\core\services\IService.class
@@ -28,3 +30,4 @@ com\fmaldonado\petsApp\webApi\controllers\PicturesController.class
 com\fmaldonado\petsApp\webApi\PetsAppApplication$WebSecurityConfig.class
 com\fmaldonado\petsApp\webApi\ServletInitializer.class
 com\fmaldonado\petsApp\webApi\controllers\AuthController.class
+com\fmaldonado\petsApp\persistence\services\FileService.class

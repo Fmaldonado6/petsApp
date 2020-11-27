@@ -5,6 +5,7 @@ D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\p
 D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\petsApp\core\services\IPicturesService.java
 D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\petsApp\webApi\PetsAppApplication.java
 D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\petsApp\webApi\controllers\AuthController.java
+D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\petsApp\persistence\services\FileService.java
 D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\petsApp\core\IUnitOfWork.java
 D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\petsApp\core\services\IPetsService.java
 D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\petsApp\webApi\utils\JWTAuthorizationFilter.java
@@ -21,6 +22,7 @@ D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\p
 D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\petsApp\persistence\services\PetsService.java
 D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\petsApp\core\domain\Comment.java
 D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\petsApp\persistence\dao\UsersDao.java
+D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\petsApp\core\services\IFileService.java
 D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\petsApp\core\services\ICommentsService.java
 D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\petsApp\persistence\dao\PetsDao.java
 D:\Escritorio\Programacion\Otros\pets-app\petsApp\src\main\java\com\fmaldonado\petsApp\persistence\dao\PicturesDao.java
