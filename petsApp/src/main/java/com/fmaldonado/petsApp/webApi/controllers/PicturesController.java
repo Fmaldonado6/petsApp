@@ -74,6 +74,8 @@ public class PicturesController {
 
             return new ResponseEntity<>(picture, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
+
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -83,6 +85,9 @@ public class PicturesController {
             @RequestParam("petId") String petId, @RequestHeader("Authorization") String token,
             @RequestParam("file") MultipartFile file) {
         try {
+
+            if(file.getSize() > 5e6)
+                return  new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 
             token = token.split(" ")[1];
 

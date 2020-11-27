@@ -115,8 +115,7 @@ public class PetsController {
                 pet.setLikes(oldPet.getDislikes() + 1);
 
             }
-            System.out.println(oldPet.getLikes());
-            System.out.println(pet.getLikes());
+
 
             Pet obj = unitOfWork.getPets().save(pet);
 

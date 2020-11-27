@@ -49,7 +49,6 @@ public class PetsAppApplication {
         @Override
         protected void configure(final HttpSecurity http) throws Exception {
             http.cors();
-            http.requiresChannel().anyRequest().requiresSecure();
             http.csrf().disable()
                     .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                     .authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/auth").permitAll()
