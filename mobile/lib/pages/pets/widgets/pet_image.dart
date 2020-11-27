@@ -17,11 +17,20 @@ class PetImage extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            image: new DecorationImage(
-              image: NetworkImage(url),
-              fit: BoxFit.cover,
-            ),
+            color: Colors.white,
+            image: url != null
+                ? new DecorationImage(
+                    image: NetworkImage(url),
+                    fit: BoxFit.cover,
+                  )
+                : null,
           ),
+          child: url == null
+              ? Icon(
+                  Icons.pets,
+                  size: 60,
+                )
+              : null,
           width: size.width * .95,
           height: size.height * .65,
         ),

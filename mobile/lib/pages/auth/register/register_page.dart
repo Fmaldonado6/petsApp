@@ -64,7 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     function: () {
                       Navigator.pop(context);
                     },
-                    text: "Pet succesfully added!",
+                    text: "User succesfully registered!",
                   ),
                 );
               }
@@ -93,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     color: Colors.red,
                     icon: Icons.close,
                     buttontext: "RETRY",
-                    text: "Couldn´t add pet!",
+                    text: "Couldn´t register user!",
                   ),
                 );
               }

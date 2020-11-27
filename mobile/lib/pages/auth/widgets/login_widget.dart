@@ -13,12 +13,23 @@ class FormData {
 }
 
 class LoginWidget extends StatelessWidget {
+  final bool showSnackBar;
+  final String message;
   final FormData form = FormData();
 
-  LoginWidget({Key key}) : super(key: key);
+  LoginWidget({Key key, this.showSnackBar, this.message}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (showSnackBar)
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            content: Text(message),
+          ),
+        );
+      });
+
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 4,

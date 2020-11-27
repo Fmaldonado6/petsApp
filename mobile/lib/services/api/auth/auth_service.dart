@@ -21,7 +21,7 @@ class AuthService extends DataService {
     Response response = await dio.post(apiUrl + "/auth", data: user);
 
 
-    return response.data;
+    return jsonDecode(response.data);
   }
 
   Future<User> getTokenInfo(String token) async {

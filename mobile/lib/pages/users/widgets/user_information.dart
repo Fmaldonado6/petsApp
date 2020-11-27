@@ -7,6 +7,7 @@ import 'package:mobile/pages/pet_detail/pet_detail.dart';
 import 'package:mobile/pages/pets/pets_page.dart';
 import 'package:mobile/services/api/users/user_service.dart';
 import 'package:mobile/shared_widgets/confirm_daialog.dart';
+import 'package:mobile/shared_widgets/empty_widget.dart';
 import 'package:mobile/shared_widgets/rounded_image.dart';
 
 class UserInformation extends StatelessWidget {
@@ -119,12 +120,17 @@ class UserInformation extends StatelessWidget {
           height: 10,
         ),
         Divider(),
-        GridView.count(
-          shrinkWrap: true,
-          crossAxisCount: size.width < 700 ? 2 : 5,
-          crossAxisSpacing: 20,
-          children: user.pets.map((pet) => getImages(pet, context)).toList(),
-        ),
+        user.pets.length != 0
+            ? GridView.count(
+                shrinkWrap: true,
+                crossAxisCount: size.width < 700 ? 2 : 5,
+                crossAxisSpacing: 20,
+                children:
+                    user.pets.map((pet) => getImages(pet, context)).toList(),
+              )
+            : EmptyWidget(
+                color: Colors.grey,
+              ),
       ],
     );
   }
@@ -149,6 +155,7 @@ class UserInformation extends StatelessWidget {
             children: [
               Container(
                 height: 100,
+                width: 100,
                 margin: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
@@ -158,18 +165,22 @@ class UserInformation extends StatelessWidget {
                       blurRadius: 5.0,
                     ),
                   ],
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                      config.baseUrl + pet.profilePicture.picture,
-                    ),
-                  ),
+                  color: Colors.white,
+                  image: pet.profilePicture != null
+                      ? DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                            config.baseUrl + pet.profilePicture.picture,
+                          ),
+                        )
+                      : null,
                 ),
+                child: pet.profilePicture == null ? Icon(Icons.pets,size: 50,) : null,
               ),
               this.user.id == UsersService.loggedUserInfo.id
                   ? Positioned(
                       top: 5,
-                      right: 30,
+                      right: 0,
                       child: Container(
                         width: 35,
                         height: 35,

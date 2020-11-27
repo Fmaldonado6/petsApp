@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/adapter.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import '../app_config.dart';
@@ -27,10 +28,12 @@ class DataService {
         return options;
       },
       onError: (e) {
+        print("Error: " + e.response.statusCode.toString());
         switch (e.response.statusCode) {
-      
           case 400:
             throw BadInput(e.message);
+          case 403:
+            throw Forbidden(e.message);
           case 404:
             throw NotFound(e.message);
           case 409:
@@ -41,6 +44,4 @@ class DataService {
       },
     ));
   }
-
-
 }

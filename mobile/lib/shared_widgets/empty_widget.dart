@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class EmptyWidget extends StatelessWidget {
-  const EmptyWidget({Key key}) : super(key: key);
+  final Color color;
+  const EmptyWidget({Key key, this.color = Colors.white}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class EmptyWidget extends StatelessWidget {
           Icon(
             Icons.help_outline,
             size: 50,
-            color: Colors.white,
+            color: color,
           ),
           SizedBox(
             height: 10,
@@ -20,7 +21,7 @@ class EmptyWidget extends StatelessWidget {
           Text(
             "No pets available",
             style: TextStyle(
-              color: Colors.white,
+              color: color,
               fontSize: 15,
             ),
           ),

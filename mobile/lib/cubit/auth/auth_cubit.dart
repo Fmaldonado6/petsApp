@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobile/cubit/auth/auth_state.dart';
 import 'package:mobile/models/models.dart';
 import 'package:mobile/services/api/auth/auth_service.dart';
 import 'package:mobile/services/api/users/user_service.dart';
+import 'package:mobile/services/exceptions/exceptions.dart';
 import 'auth_state.dart';
 
 @injectable
@@ -30,8 +32,11 @@ class AuthCubit extends Cubit<AuthState> {
       UsersService.loggedUserInfo = userInfo;
 
       emit(AuthCompleted(userInfo));
+    } on DioError catch (e) {
+      if (e.error is AppError) return emit(AuthInitialError("Couldn´t login please try again"));
+      emit(AuthError(e.message));
     } catch (e) {
-      emit(AuthError("Error $e"));
+      emit(AuthError(e.toString()));
     }
   }
 
@@ -42,6 +47,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> login(User user) async {
+    try {
       emit(AuthLoading());
 
       final token = (await _authService.login(user))["token"];
@@ -57,6 +63,11 @@ class AuthCubit extends Cubit<AuthState> {
       UsersService.loggedUserInfo = userInfo;
 
       emit(AuthCompleted(userInfo));
-  
+    }on DioError catch (e) {
+
+      if(e.error is NotFound ||e.error is Forbidden) emit(AuthInitialError("Wrong username or password"));
+
+      emit(AuthInitialError("Couldn´t login, please try again"));
+    }
   }
 }

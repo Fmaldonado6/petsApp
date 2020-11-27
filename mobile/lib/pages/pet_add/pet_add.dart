@@ -83,7 +83,7 @@ class _PetAddState extends State<PetAdd> {
                     color: Colors.red,
                     icon: Icons.close,
                     buttontext: "RETRY",
-                    text: "Couldn´t add pet!",
+                    text: state.error,
                   ),
                 );
               }

@@ -33,7 +33,6 @@ class _PetsLoadedState extends State<PetsLoaded> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Container(
       width: double.infinity,
       child: Column(
@@ -63,29 +62,32 @@ class _PetsLoadedState extends State<PetsLoaded> {
     );
   }
 
-  Listener buildPetCards(Pet pet) {
+  Widget buildPetCards(Pet pet) {
+    final size = MediaQuery.of(context).size;
+
     return Listener(
-      onPointerMove: (pointerEvent) {
-        final provider =
-            Provider.of<FeedbackPositionProvider>(context, listen: false);
-        provider.updatePosition(pointerEvent.localDelta.dx);
-      },
-      onPointerCancel: (_) {
-        final provider =
-            Provider.of<FeedbackPositionProvider>(context, listen: false);
-        provider.resetPosition();
-      },
-      onPointerUp: (_) {
-        final provider =
-            Provider.of<FeedbackPositionProvider>(context, listen: false);
-        provider.resetPosition();
-      },
-      child: PetImageDraggable(
-        url: config.baseUrl + pet.profilePicture.picture,
-        focus: pet == widget.pets.last,
-        onDragEnd: (details) => onDragEnd(details, pet),
-      ),
-    );
+        onPointerMove: (pointerEvent) {
+          final provider =
+              Provider.of<FeedbackPositionProvider>(context, listen: false);
+          provider.updatePosition(pointerEvent.localDelta.dx);
+        },
+        onPointerCancel: (_) {
+          final provider =
+              Provider.of<FeedbackPositionProvider>(context, listen: false);
+          provider.resetPosition();
+        },
+        onPointerUp: (_) {
+          final provider =
+              Provider.of<FeedbackPositionProvider>(context, listen: false);
+          provider.resetPosition();
+        },
+        child: PetImageDraggable(
+          url: pet.profilePicture != null
+              ? config.baseUrl + pet.profilePicture.picture
+              : null,
+          focus: pet == widget.pets.last,
+          onDragEnd: (details) => onDragEnd(details, pet),
+        ));
   }
 
   void onDragEnd(DraggableDetails details, Pet pet) async {

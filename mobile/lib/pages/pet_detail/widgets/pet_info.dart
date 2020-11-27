@@ -21,11 +21,20 @@ class PetInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        RoundedImage(
-          imageUrl: config.baseUrl + pet.profilePicture.picture,
-          width: 125,
-          height: 125,
-        ),
+        pet.profilePicture != null
+            ? RoundedImage(
+                imageUrl: config.baseUrl + pet.profilePicture.picture,
+                width: 125,
+                height: 125,
+              )
+            : Container(
+                width: 125,
+                height: 125,
+                child: Icon(
+                  Icons.pets,
+                  size: 50,
+                ),
+              ),
         Center(
           child: Container(
             margin: EdgeInsets.only(top: 20),
@@ -104,7 +113,7 @@ class PetInfo extends StatelessWidget {
                   ? PetInfoItem(
                       title: "Age",
                       widget: Text(
-                        "${pet.age.toString()} year",
+                        "${pet.age.toString()} ${pet.age > 1 && pet.age != 0 ? 'years' : 'year'}",
                         style: TextStyle(
                           fontSize: 17,
                         ),

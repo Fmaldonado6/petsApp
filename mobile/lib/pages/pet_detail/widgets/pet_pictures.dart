@@ -78,8 +78,10 @@ class _PetPicturesState extends State<PetPictures> {
             children: [
               ListView(
                 scrollDirection: Axis.horizontal,
-                children:
-                    (state as PicturesList).pictures.map(getPicture).toList(),
+                children: (state as PicturesList)
+                    .pictures
+                    .map((e) => e.picture != null ? getPicture(e) : Container())
+                    .toList(),
               ),
               widget.isOwner
                   ? Positioned(

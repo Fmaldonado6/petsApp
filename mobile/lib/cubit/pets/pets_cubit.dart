@@ -8,6 +8,7 @@ import 'package:mobile/services/api/auth/auth_service.dart';
 import 'package:mobile/services/api/pets/pets_service.dart';
 import 'package:mobile/services/api/pictures/pictures_service.dart';
 import 'package:mobile/services/api/users/user_service.dart';
+import 'package:mobile/services/exceptions/exceptions.dart';
 
 @injectable
 class PetsCubit extends Cubit<PetsState> {
@@ -40,7 +41,6 @@ class PetsCubit extends Cubit<PetsState> {
     return UsersService.loggedUserInfo.id == pet.ownerId;
   }
 
-
   Future<bool> updatePet(Pet pet) async {
     try {
       await this.petsService.updatePet(pet);
@@ -51,17 +51,36 @@ class PetsCubit extends Cubit<PetsState> {
   }
 
   Future<void> addPet(PickedFile file, Pet pet) async {
-    emit(PetsLoading());
-    final newPet = await petsService.addPets(pet);
-    FormData formData = new FormData.fromMap({
-      "file": await MultipartFile.fromFile(file.path,
-          filename: file.path.split("/").last),
-      "petId": newPet.id,
-      "extension": file.path.split(".").last
-    });
-    final savedPicture = await picturesService.addPicture(formData);
-    newPet.profilePictureId = savedPicture.id;
-    final updatedPet = await petsService.updatePet(newPet);
-    emit(PetsCompleted(updatedPet));
+    var newPet;
+
+    try {
+      emit(PetsLoading());
+
+      newPet = await petsService.addPets(pet);
+
+      FormData formData = new FormData.fromMap({
+        "file": await MultipartFile.fromFile(file.path,
+            filename: file.path.split("/").last),
+        "petId": newPet.id,
+        "extension": file.path.split(".").last
+      });
+
+      final savedPicture = await picturesService.addPicture(formData);
+
+      newPet.profilePictureId = savedPicture.id;
+
+      final updatedPet = await petsService.updatePet(newPet);
+
+      emit(PetsCompleted(updatedPet));
+    } on DioError catch (e) {
+      if (newPet != null) petsService.deletePet(newPet);
+
+      if (e.error is BadInput)
+        return emit(PetsError("The maximum size of an image is 5mb"));
+
+      return emit(PetsError("Couldn´t add pet!"));
+    } catch (e) {
+      return emit(PetsError("Couldn´t add pet!"));
+    }
   }
 }

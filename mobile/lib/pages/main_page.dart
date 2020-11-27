@@ -4,6 +4,7 @@ import 'package:mobile/cubit/auth/auth_cubit.dart';
 import 'package:mobile/cubit/auth/auth_state.dart';
 import 'package:mobile/pages/auth/auth_page.dart';
 import 'package:mobile/pages/pets/pets_page.dart';
+import 'package:mobile/services/exceptions/exceptions.dart';
 import 'package:mobile/services/injection_container.dart';
 import 'package:mobile/shared_widgets/error_widget.dart';
 
@@ -47,6 +48,13 @@ class _MainPageState extends State<MainPage> {
 
           if (state is AuthCompleted) {
             return PetsPage(userInfo: state.user);
+          }
+
+          if (state is AuthInitialError) {
+            return AuthPage(
+              showSnackBar: true,
+              message: state.message,
+            );
           }
 
           if (state is AuthError)
