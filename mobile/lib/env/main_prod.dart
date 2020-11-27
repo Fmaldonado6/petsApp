@@ -6,7 +6,7 @@ import '../main.dart';
 
 void main() {
   var configuredApp =
-      new AppConfig(production: true, baseUrl: "http://187.162.139.211:8080/");
+      new AppConfig(production: true, baseUrl: "https://petsapp.cloudns.cl:8080/");
 
   configureInjection();
 

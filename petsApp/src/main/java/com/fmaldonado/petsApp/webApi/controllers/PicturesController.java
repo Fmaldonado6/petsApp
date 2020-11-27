@@ -30,7 +30,7 @@ import io.jsonwebtoken.Jwts;
 
 @RestController
 @RequestMapping({ "/api/v1/pictures" })
-@CrossOrigin({ "http://localhost:4200" })
+@CrossOrigin
 public class PicturesController {
 
     @Autowired

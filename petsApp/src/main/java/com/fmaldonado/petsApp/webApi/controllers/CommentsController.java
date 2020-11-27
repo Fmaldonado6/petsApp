@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping({ "/api/v1/comments" })
-@CrossOrigin({ "http://localhost:4200" })
+@CrossOrigin
 public class CommentsController {
     @Autowired
     private IUnitOfWork unitOfWork;
