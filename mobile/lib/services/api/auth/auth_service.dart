@@ -4,10 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/src/client.dart';
 import 'package:injectable/injectable.dart';
-import 'package:mobile/app_config.dart';
-import 'package:mobile/models/models.dart';
-import 'package:mobile/services/api/users/user_service.dart';
-import 'package:mobile/services/data_service.dart';
+import 'package:PetRoulette/app_config.dart';
+import 'package:PetRoulette/models/models.dart';
+import 'package:PetRoulette/services/api/users/user_service.dart';
+import 'package:PetRoulette/services/data_service.dart';
 
 @injectable
 class AuthService extends DataService {

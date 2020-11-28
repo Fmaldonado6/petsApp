@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mobile/cubit/register/register_cubit.dart';
-import 'package:mobile/models/models.dart';
+import 'package:PetRoulette/cubit/register/register_cubit.dart';
+import 'package:PetRoulette/models/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterForm extends StatefulWidget {

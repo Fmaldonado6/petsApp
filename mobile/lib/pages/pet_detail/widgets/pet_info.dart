@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mobile/app_config.dart';
-import 'package:mobile/models/models.dart';
-import 'package:mobile/pages/pet_detail/widgets/pet_info_item.dart';
-import 'package:mobile/pages/pet_detail/widgets/pet_pictures.dart';
-import 'package:mobile/shared_widgets/rounded_image.dart';
+import 'package:PetRoulette/app_config.dart';
+import 'package:PetRoulette/models/models.dart';
+import 'package:PetRoulette/pages/pet_detail/widgets/pet_info_item.dart';
+import 'package:PetRoulette/pages/pet_detail/widgets/pet_pictures.dart';
+import 'package:PetRoulette/shared_widgets/rounded_image.dart';
 
 class PetInfo extends StatelessWidget {
   final Pet pet;

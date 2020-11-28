@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/cubit/auth/auth_cubit.dart';
-import 'package:mobile/cubit/auth/auth_state.dart';
-import 'package:mobile/pages/auth/auth_page.dart';
-import 'package:mobile/pages/pets/pets_page.dart';
-import 'package:mobile/services/exceptions/exceptions.dart';
-import 'package:mobile/services/injection_container.dart';
-import 'package:mobile/shared_widgets/error_widget.dart';
+import 'package:PetRoulette/cubit/auth/auth_cubit.dart';
+import 'package:PetRoulette/cubit/auth/auth_state.dart';
+import 'package:PetRoulette/pages/auth/auth_page.dart';
+import 'package:PetRoulette/pages/pets/pets_page.dart';
+import 'package:PetRoulette/services/exceptions/exceptions.dart';
+import 'package:PetRoulette/services/injection_container.dart';
+import 'package:PetRoulette/shared_widgets/error_widget.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key key}) : super(key: key);

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mobile/cubit/pets/pets_cubit.dart';
-import 'package:mobile/cubit/users/users_cubit.dart';
-import 'package:mobile/cubit/users/users_state.dart';
-import 'package:mobile/models/models.dart';
-import 'package:mobile/pages/users/widgets/user_information.dart';
-import 'package:mobile/services/injection_container.dart';
-import 'package:mobile/shared_widgets/empty_widget.dart';
-import 'package:mobile/shared_widgets/error_widget.dart';
+import 'package:PetRoulette/cubit/pets/pets_cubit.dart';
+import 'package:PetRoulette/cubit/users/users_cubit.dart';
+import 'package:PetRoulette/cubit/users/users_state.dart';
+import 'package:PetRoulette/models/models.dart';
+import 'package:PetRoulette/pages/users/widgets/user_information.dart';
+import 'package:PetRoulette/services/injection_container.dart';
+import 'package:PetRoulette/shared_widgets/empty_widget.dart';
+import 'package:PetRoulette/shared_widgets/error_widget.dart';
 
 class UserPage extends StatefulWidget {
   final String id;

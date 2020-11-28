@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mobile/app_config.dart';
-import 'package:mobile/cubit/pictures/pictures_cubit.dart';
-import 'package:mobile/cubit/pictures/pictures_state.dart';
-import 'package:mobile/models/models.dart';
-import 'package:mobile/services/injection_container.dart';
-import 'package:mobile/shared_widgets/confirm_daialog.dart';
-import 'package:mobile/shared_widgets/error_widget.dart';
+import 'package:PetRoulette/app_config.dart';
+import 'package:PetRoulette/cubit/pictures/pictures_cubit.dart';
+import 'package:PetRoulette/cubit/pictures/pictures_state.dart';
+import 'package:PetRoulette/models/models.dart';
+import 'package:PetRoulette/services/injection_container.dart';
+import 'package:PetRoulette/shared_widgets/confirm_daialog.dart';
+import 'package:PetRoulette/shared_widgets/error_widget.dart';
+import 'package:PetRoulette/cubit/pictures/pictures_cubit.dart';
 
 class PetPictures extends StatefulWidget {
   final Pet pet;

@@ -2,14 +2,14 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
-import 'package:mobile/cubit/pets/pets_state.dart';
-import 'package:mobile/models/models.dart';
-import 'package:mobile/services/api/auth/auth_service.dart';
-import 'package:mobile/services/api/pets/pets_service.dart';
-import 'package:mobile/services/api/pictures/pictures_service.dart';
-import 'package:mobile/services/api/reports/reports_service.dart';
-import 'package:mobile/services/api/users/user_service.dart';
-import 'package:mobile/services/exceptions/exceptions.dart';
+import 'package:PetRoulette/cubit/pets/pets_state.dart';
+import 'package:PetRoulette/models/models.dart';
+import 'package:PetRoulette/services/api/auth/auth_service.dart';
+import 'package:PetRoulette/services/api/pets/pets_service.dart';
+import 'package:PetRoulette/services/api/pictures/pictures_service.dart';
+import 'package:PetRoulette/services/api/reports/reports_service.dart';
+import 'package:PetRoulette/services/api/users/user_service.dart';
+import 'package:PetRoulette/services/exceptions/exceptions.dart';
 
 @injectable
 class PetsCubit extends Cubit<PetsState> {

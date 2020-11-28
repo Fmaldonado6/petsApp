@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/cubit/register/register_cubit.dart';
-import 'package:mobile/cubit/register/register_state.dart';
-import 'package:mobile/pages/auth/register/widgets/register_form.dart';
-import 'package:mobile/services/injection_container.dart';
-import 'package:mobile/shared_widgets/info_widget.dart';
+import 'package:PetRoulette/cubit/register/register_cubit.dart';
+import 'package:PetRoulette/cubit/register/register_state.dart';
+import 'package:PetRoulette/pages/auth/register/widgets/register_form.dart';
+import 'package:PetRoulette/services/injection_container.dart';
+import 'package:PetRoulette/shared_widgets/info_widget.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key key}) : super(key: key);

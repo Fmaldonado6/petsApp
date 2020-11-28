@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/cubit/pets/pets_cubit.dart';
-import 'package:mobile/cubit/pets/pets_state.dart';
-import 'package:mobile/models/models.dart';
-import 'package:mobile/pages/pet_add/widgets/pet_add_form.dart';
-import 'package:mobile/services/injection_container.dart';
-import 'package:mobile/shared_widgets/info_widget.dart';
+import 'package:PetRoulette/cubit/pets/pets_cubit.dart';
+import 'package:PetRoulette/cubit/pets/pets_state.dart';
+import 'package:PetRoulette/models/models.dart';
+import 'package:PetRoulette/pages/pet_add/widgets/pet_add_form.dart';
+import 'package:PetRoulette/services/injection_container.dart';
+import 'package:PetRoulette/shared_widgets/info_widget.dart';
 
 class PetAdd extends StatefulWidget {
   final User owner;

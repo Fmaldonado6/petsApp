@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mobile/pages/main_page.dart';
-import 'package:mobile/provider/feedback_position_provider.dart';
+import 'package:PetRoulette/pages/main_page.dart';
+import 'package:PetRoulette/provider/feedback_position_provider.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => FeedbackPositionProvider(),
       child: MaterialApp(
-        title: 'Pets App',
+        title: 'PetRoulette',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.red,

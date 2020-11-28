@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/provider/feedback_position_provider.dart';
+import 'package:PetRoulette/provider/feedback_position_provider.dart';
 import 'package:provider/provider.dart';
 
 class PetImage extends StatelessWidget {

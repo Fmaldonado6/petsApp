@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/cubit/pets/pets_cubit.dart';
-import 'package:mobile/models/models.dart';
-import 'package:mobile/pages/pet_detail/pet_detail.dart';
-import 'package:mobile/pages/users/user_page.dart';
-import 'package:mobile/shared_widgets/confirm_daialog.dart';
+import 'package:PetRoulette/cubit/pets/pets_cubit.dart';
+import 'package:PetRoulette/models/models.dart';
+import 'package:PetRoulette/pages/pet_detail/pet_detail.dart';
+import 'package:PetRoulette/pages/users/user_page.dart';
+import 'package:PetRoulette/shared_widgets/confirm_daialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PetName extends StatelessWidget {

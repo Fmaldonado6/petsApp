@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:mobile/app_config.dart';
-import 'package:mobile/models/models.dart';
-import 'package:mobile/services/data_service.dart';
+import 'package:PetRoulette/app_config.dart';
+import 'package:PetRoulette/models/models.dart';
+import 'package:PetRoulette/services/data_service.dart';
 
 @injectable
 class UsersService extends DataService {

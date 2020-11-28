@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:mobile/app_config.dart';
-import 'package:mobile/models/models.dart';
-import 'package:mobile/pages/pet_add/pet_add.dart';
-import 'package:mobile/pages/pet_detail/pet_detail.dart';
-import 'package:mobile/pages/pets/pets_page.dart';
-import 'package:mobile/services/api/users/user_service.dart';
-import 'package:mobile/shared_widgets/confirm_daialog.dart';
-import 'package:mobile/shared_widgets/empty_widget.dart';
-import 'package:mobile/shared_widgets/rounded_image.dart';
+import 'package:PetRoulette/app_config.dart';
+import 'package:PetRoulette/models/models.dart';
+import 'package:PetRoulette/pages/pet_add/pet_add.dart';
+import 'package:PetRoulette/pages/pet_detail/pet_detail.dart';
+import 'package:PetRoulette/pages/pets/pets_page.dart';
+import 'package:PetRoulette/services/api/users/user_service.dart';
+import 'package:PetRoulette/shared_widgets/confirm_daialog.dart';
+import 'package:PetRoulette/shared_widgets/empty_widget.dart';
+import 'package:PetRoulette/shared_widgets/rounded_image.dart';
 
 class UserInformation extends StatelessWidget {
   final User user;

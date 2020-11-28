@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/cubit/pets/pets_cubit.dart';
-import 'package:mobile/models/models.dart';
-import 'package:mobile/pages/pet_detail/widgets/pet_info.dart';
-import 'package:mobile/services/injection_container.dart';
+import 'package:PetRoulette/cubit/pets/pets_cubit.dart';
+import 'package:PetRoulette/models/models.dart';
+import 'package:PetRoulette/pages/pet_detail/widgets/pet_info.dart';
+import 'package:PetRoulette/services/injection_container.dart';
 
 class PetDetails extends StatefulWidget {
   final Pet pet;

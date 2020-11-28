@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:mobile/cubit/auth/auth_state.dart';
-import 'package:mobile/models/models.dart';
-import 'package:mobile/services/api/auth/auth_service.dart';
-import 'package:mobile/services/api/users/user_service.dart';
-import 'package:mobile/services/exceptions/exceptions.dart';
+import 'package:PetRoulette/cubit/auth/auth_state.dart';
+import 'package:PetRoulette/models/models.dart';
+import 'package:PetRoulette/services/api/auth/auth_service.dart';
+import 'package:PetRoulette/services/api/users/user_service.dart';
+import 'package:PetRoulette/services/exceptions/exceptions.dart';
 import 'auth_state.dart';
 
 @injectable

@@ -2,10 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mobile/cubit/auth/auth_cubit.dart';
-import 'package:mobile/models/models.dart';
+import 'package:PetRoulette/cubit/auth/auth_cubit.dart';
+import 'package:PetRoulette/models/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/pages/auth/register/register_page.dart';
+import 'package:PetRoulette/pages/auth/register/register_page.dart';
 
 class FormData {
   String email = "";

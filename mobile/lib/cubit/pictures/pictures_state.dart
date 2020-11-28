@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:mobile/models/models.dart';
+import 'package:PetRoulette/models/models.dart';
 
 @immutable
 abstract class PicturesState {

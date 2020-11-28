@@ -4,8 +4,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mobile/cubit/pets/pets_cubit.dart';
-import 'package:mobile/models/models.dart';
+import 'package:PetRoulette/cubit/pets/pets_cubit.dart';
+import 'package:PetRoulette/models/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PetAddForm extends StatefulWidget {

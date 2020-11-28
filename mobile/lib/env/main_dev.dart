@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:mobile/services/injection_container.dart';
+import 'package:PetRoulette/services/injection_container.dart';
 
 import '../app_config.dart';
 import '../main.dart';

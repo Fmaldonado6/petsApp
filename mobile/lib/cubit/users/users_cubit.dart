@@ -4,11 +4,11 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
-import 'package:mobile/cubit/users/users_state.dart';
-import 'package:mobile/models/models.dart';
-import 'package:mobile/services/api/pets/pets_service.dart';
-import 'package:mobile/services/api/pictures/pictures_service.dart';
-import 'package:mobile/services/api/users/user_service.dart';
+import 'package:PetRoulette/cubit/users/users_state.dart';
+import 'package:PetRoulette/models/models.dart';
+import 'package:PetRoulette/services/api/pets/pets_service.dart';
+import 'package:PetRoulette/services/api/pictures/pictures_service.dart';
+import 'package:PetRoulette/services/api/users/user_service.dart';
 
 @injectable
 class UsersCubit extends Cubit<UsersState> {
