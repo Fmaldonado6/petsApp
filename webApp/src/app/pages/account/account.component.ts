@@ -140,9 +140,12 @@ export class AccountPage implements OnInit {
     if (width < 700) {
       const dialog = this.bottomSheet.open(InfoPetComponent)
       dialog.instance.petInfo = pet
+      dialog.instance.ref = dialog;
+
     } else {
       const dialog = this.dialog.open(InfoPetComponent)
       dialog.componentInstance.petInfo = pet
+      dialog.componentInstance.ref = dialog;
     }
 
   }

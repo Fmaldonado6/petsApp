@@ -1,5 +1,7 @@
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { Router } from '@angular/router';
 import { ConfirmComponent } from './../../confirm/confirm.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UserService } from './../../../../services/api/users/user.service';
 import { Status } from './../../../../shared/models/Status';
 import { environment } from './../../../../../environments/environment';
@@ -20,11 +22,12 @@ export class InfoPetComponent implements OnInit {
   currentStatus = Status.loading
   picturesStatus = Status.loading
   @Input() petInfo: Pet;
-
+  @Input() ref: MatDialogRef<InfoPetComponent> | MatBottomSheetRef<InfoPetComponent>;
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
-    private picturesService: PicturesService
+    private picturesService: PicturesService,
+    private router: Router
   ) {
   }
 
@@ -33,7 +36,6 @@ export class InfoPetComponent implements OnInit {
 
   ngAfterViewInit() {
     setTimeout(() => this.loadInfo(), 100)
-    console.log(this.petInfo)
   }
 
   uploadPicture(event) {
@@ -72,7 +74,7 @@ export class InfoPetComponent implements OnInit {
           title: "Delete picture?",
           text: "Are you sure you want to delete this picture?",
           confirm: "Delete",
-          cancel:"Cancel"
+          cancel: "Cancel"
         }
       })
 
@@ -83,6 +85,16 @@ export class InfoPetComponent implements OnInit {
     })
 
 
+  }
+
+  ownerDetails(userId) {
+    
+    if(this.ref instanceof MatDialogRef)
+      this.ref.close();
+    else
+      this.ref.dismiss();
+
+    this.router.navigate(["account/" + userId])
   }
 
   loadInfo() {

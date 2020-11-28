@@ -39,7 +39,7 @@
       </div>
       <div class="item" fxLayout="column">
         <span class="title">Owner: </span>
-        <span>{{petInfo.owner.name}}</span>
+        <span (click)="ownerDetails(petInfo.ownerId)">{{petInfo.owner.name}}</span>
       </div>
       <input #file type="file" (change)="uploadPicture($event)" fxShow="false">
       <div class="item" fxLayout="column">
