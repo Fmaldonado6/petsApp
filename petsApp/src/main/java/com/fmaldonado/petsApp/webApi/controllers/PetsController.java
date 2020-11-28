@@ -3,11 +3,14 @@ package com.fmaldonado.petsApp.webApi.controllers;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.http.HttpStatus;
 import com.fmaldonado.petsApp.core.domain.Pet;
 import com.fmaldonado.petsApp.core.domain.Picture;
+import com.fmaldonado.petsApp.core.domain.Report;
 import com.fmaldonado.petsApp.core.domain.User;
 
 import org.springframework.http.ResponseEntity;
@@ -39,7 +42,7 @@ public class PetsController {
     }
 
     @DeleteMapping({ "/{id}" })
-    public ResponseEntity deletePet(@PathVariable final String id) {
+    public ResponseEntity<Object> deletePet(@PathVariable final String id) {
         try {
             final Pet pet = this.unitOfWork.getPets().get(id);
 
@@ -66,20 +69,29 @@ public class PetsController {
     @GetMapping({ "" })
     public ResponseEntity<List<Pet>> getPets() {
         try {
-            final List<Pet> returnList = this.unitOfWork.getPets().getAll();
+            final List<Pet> petsList = this.unitOfWork.getPets().getAll();
+            final List<Pet> returnList = new ArrayList<>();
+            for (Pet pet : petsList) {
 
-            for (Pet pet : returnList) {
+                List<Report> reports = this.unitOfWork.getReports().findReportByPetId(pet.getId());
+
+                if (!reports.isEmpty())
+                    continue;
 
                 User user = this.unitOfWork.getUsers().get(pet.getOwnerId());
 
                 pet.setOwner(user);
 
-                if (pet.getProfilePictureId() == null)
+                if (pet.getProfilePictureId() == null){
+                    returnList.add(pet);
                     continue;
+                }
 
                 Picture profilePic = this.unitOfWork.getPictures().get(pet.getProfilePictureId());
 
                 pet.setProfilePicture(profilePic);
+
+                returnList.add(pet);
 
             }
 
@@ -94,7 +106,7 @@ public class PetsController {
     public ResponseEntity<Pet> addPet(@RequestBody final Pet pet) {
         try {
             final Pet obj = this.unitOfWork.getPets().save(pet);
-            return new ResponseEntity<Pet>(obj, HttpStatus.OK);
+            return new ResponseEntity<>(obj, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -115,7 +127,6 @@ public class PetsController {
                 pet.setLikes(oldPet.getDislikes() + 1);
 
             }
-
 
             Pet obj = unitOfWork.getPets().save(pet);
 

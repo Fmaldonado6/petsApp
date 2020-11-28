@@ -2,6 +2,7 @@ package com.fmaldonado.petsApp.persistence;
 
 import com.fmaldonado.petsApp.core.services.IPetsService;
 import com.fmaldonado.petsApp.core.services.IPicturesService;
+import com.fmaldonado.petsApp.core.services.IReportsService;
 import com.fmaldonado.petsApp.core.services.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.fmaldonado.petsApp.core.services.ICommentsService;
@@ -21,6 +22,9 @@ public class UnitOfWork implements IUnitOfWork {
     private IPicturesService picturesService;
     @Autowired
     private IPetsService petsService;
+
+    @Autowired
+    private IReportsService reportsService;
 
     @Autowired
     private IFileService fileService;
@@ -48,5 +52,10 @@ public class UnitOfWork implements IUnitOfWork {
     @Override
     public IFileService getFiles() {
         return this.fileService;
+    }
+
+    @Override
+    public IReportsService getReports() {
+        return this.reportsService;
     }
 }
