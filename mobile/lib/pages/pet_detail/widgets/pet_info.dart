@@ -1,3 +1,4 @@
+import 'package:PetRoulette/pages/users/user_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -102,10 +103,23 @@ class PetInfo extends StatelessWidget {
                   : Container(),
               PetInfoItem(
                 title: "Owner",
-                widget: Text(
-                  pet.owner.name,
-                  style: TextStyle(
-                    fontSize: 17,
+                widget: FlatButton(
+                  padding: EdgeInsets.all(0),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      new MaterialPageRoute(
+                        builder: (context) => UserPage(
+                          id: pet.ownerId,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    pet.owner.name,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 17,
+                    ),
                   ),
                 ),
               ),
@@ -114,6 +128,17 @@ class PetInfo extends StatelessWidget {
                       title: "Age",
                       widget: Text(
                         "${pet.age.toString()} ${pet.age > 1 && pet.age != 0 ? 'years' : 'year'}",
+                        style: TextStyle(
+                          fontSize: 17,
+                        ),
+                      ),
+                    )
+                  : Container(),
+              pet.description != null
+                  ? PetInfoItem(
+                      title: "Description",
+                      widget: Text(
+                        "${pet.description}",
                         style: TextStyle(
                           fontSize: 17,
                         ),
