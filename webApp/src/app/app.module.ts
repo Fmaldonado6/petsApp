@@ -20,6 +20,7 @@ import { AddPetModal } from './components/modals/pets/add-pet/add-pet.component'
 import { SwingModule } from 'angular2-swing';
 import { InfoPetComponent } from './components/modals/pets/info-pet/info-pet.component';
 import { ConfirmComponent } from './components/modals/confirm/confirm.component';
+import { ErrorComponent } from './components/shared/error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { ConfirmComponent } from './components/modals/confirm/confirm.component'
     EmptyComponent,
     AddPetModal,
     InfoPetComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,

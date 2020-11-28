@@ -3,5 +3,6 @@ export enum Status {
   loaded,
   error,
   completed,
-  empty
+  empty,
+  badInput
 }

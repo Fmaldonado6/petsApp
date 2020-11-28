@@ -1,3 +1,5 @@
+import { Types } from './../../info-menu/info-menu.component';
+import { BadInput } from './../../../../shared/errors/errors';
 import { Status } from './../../../../shared/models/Status';
 import { PetsService } from './../../../../services/api/pets/pets.service';
 import { PicturesService } from './../../../../services/api/pictures/pictures.service';
@@ -22,6 +24,7 @@ export class AddPetModal implements OnInit {
   form: FormGroup;
   pet: Pet = new Pet;
   hasPicture = false;
+  Types = Types;
   profilePicture: Picture;
   pictureData: any
   @Input() ref: any
@@ -127,6 +130,12 @@ export class AddPetModal implements OnInit {
         this.changeDetector.detectChanges();
 
       })
+
+    }, (e) => {
+      if (e instanceof BadInput)
+        return this.currenStatus = Status.badInput
+
+      this.currenStatus = Status.error
 
     })
   }

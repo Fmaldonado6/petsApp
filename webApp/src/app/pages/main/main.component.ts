@@ -1,12 +1,15 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmComponent } from './../../components/modals/confirm/confirm.component';
 import { InfoPetComponent } from './../../components/modals/pets/info-pet/info-pet.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { PetsService } from './../../services/api/pets/pets.service';
 import { Component, OnInit } from '@angular/core';
-import { Pet } from 'src/app/shared/models/dataModels';
+import { Pet, Report } from 'src/app/shared/models/dataModels';
 import { Status } from 'src/app/shared/models/Status';
 import { StackConfig } from 'angular2-swing';
 import { Router } from '@angular/router';
+import { ReportsService } from 'src/app/services/api/reports/reports.service';
 
 const RIGHT = "Symbol(RIGHT)"
 const LEFT = "Symbol(LEFT)"
@@ -19,7 +22,7 @@ const LEFT = "Symbol(LEFT)"
 export class MainPage implements OnInit {
   Status = Status;
   Math = Math
-  currentStatus = Status.loading
+  currentStatus = Status.error
   like = false;
   dislike = false;
   pets: Pet[]
@@ -28,8 +31,9 @@ export class MainPage implements OnInit {
   constructor(
     private petsService: PetsService,
     private dialog: MatDialog,
-
-    private bottomSheet: MatBottomSheet
+    private reportsService: ReportsService,
+    private bottomSheet: MatBottomSheet,
+    private snackBar: MatSnackBar
   ) {
     this.getPets();
     this.stackConfig = {
@@ -52,6 +56,8 @@ export class MainPage implements OnInit {
       this.currentPet = this.pets.length - 1
       this.currentStatus = Status.loaded
 
+    }, () => {
+      this.currentStatus = Status.error
     })
   }
 
@@ -68,8 +74,36 @@ export class MainPage implements OnInit {
 
   }
 
-  signOut() {
+  openReport(e) {
+    e.stopPropagation();
+    const dialog = this.dialog.open(ConfirmComponent, {
+      data: {
+        title: "Report pet",
+        text: "Would you like to report this pet?",
+        confirm: "Report",
+        cancel: "Cancel"
+      },
+    });
 
+    dialog.componentInstance.acceptEvent.subscribe(() => {
+      let report = new Report();
+      report.petId = this.pets[this.currentPet].id;
+      report.petname = this.pets[this.currentPet].name;
+      report.userId = this.pets[this.currentPet].ownerId;
+      report.username = this.pets[this.currentPet].owner.name;
+      report.pictureId = this.pets[this.currentPet].profilePictureId;
+      report.picture = this.pets[this.currentPet].profilePicture.picture;
+
+      this.reportsService.addReport(report).subscribe(() => {
+        this.getPets();
+      }, () => {
+        this.getPets();
+        this.snackBar.open("Couldn´t create report!", "CLOSE", { duration: 2000 });
+      });
+
+
+
+    })
   }
 
   removeLikeDislike() {

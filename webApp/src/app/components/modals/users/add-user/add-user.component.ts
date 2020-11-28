@@ -83,7 +83,6 @@ export class AddUserModal implements OnInit {
       this.currentStatus = Status.completed
       this.changeDetector.detectChanges();
     }, (e) => {
-      console.log(e)
       this.changeDetector.detectChanges();
       this.currentStatus = Status.error
 

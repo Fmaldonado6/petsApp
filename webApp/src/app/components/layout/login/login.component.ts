@@ -5,6 +5,7 @@ import { AddUserModal } from './../../modals/users/add-user/add-user.component';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/shared/models/dataModels';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
-
+    private snakcbar: MatSnackBar,
     private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -44,6 +45,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(user).subscribe((token: any) => {
       this.authService.setToken(token.token)
       this.loginEvent.emit()
+    }, () => {
+      this.snakcbar.open("Wrong username or password!", "CLOSE", { duration: 2000 })
     })
   }
 

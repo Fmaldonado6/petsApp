@@ -12,6 +12,10 @@
     <img *ngFor="let pet of pets;let i = index" swing-card class="image-container mat-elevation-z5"
       [src]="'http://localhost:8080/'+pet.profilePicture.picture">
 
+    <div class="action-buttons" fxLayout="row">
+   
+    </div>
+
     <div class="card" (click)="openInfo()" matRipple fxLayout="row" fxLayoutAlign="start center">
       <mat-icon class="pet-icon">pets</mat-icon>
       <div class="name-container" fxLayout="column" fxLayoutAlign="center start">
@@ -31,7 +35,11 @@
           <span *ngIf="dislike">{{pets[currentPet].dislikes+1}}</span>
 
         </div>
+
       </div>
+      <button class="report" mat-icon-button (click)="openReport($event)">
+        <mat-icon>message</mat-icon>
+      </button>
     </div>
 
   </div>
@@ -39,5 +47,9 @@
   <div class="empty" *ngSwitchCase="Status.empty" fxLayout="column" fxLayoutAlign="center center">
     <mat-icon>help_outline</mat-icon>
     <span>No pets available</span>
+  </div>
+
+  <div class="error" *ngSwitchCase="Status.error" fxLayout="column" fxLayoutAlign="center center">
+    <app-error color="white" (clickEvent)="getPets()"></app-error>
   </div>
 </div>

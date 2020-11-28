@@ -54,4 +54,13 @@
   <div class="completed" *ngSwitchCase="Status.completed">
     <info-menu (clickEvent)="close()" title="Pet succesfully added!" ></info-menu>
   </div>
+
+  
+  <div class="completed" *ngSwitchCase="Status.badInput">
+    <info-menu (clickEvent)="currenStatus = Status.loaded" accept="RETRY" [type]="Types.badRequest" title="Image file size must be less than 5mb!" ></info-menu>
+  </div>
+
+  <div class="completed" *ngSwitchCase="Status.error">
+    <info-menu (clickEvent)="currenStatus = Status.loaded" accept="RETRY" [type]="Types.badRequest" title="Couldn´t add pet!" ></info-menu>
+  </div>
 </div>

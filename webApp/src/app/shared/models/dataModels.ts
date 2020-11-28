@@ -20,7 +20,15 @@ export class Picture {
     comments: Comment[]
 }
 
-
+export class Report{
+    id:string;
+    petId:string;
+    userId:string;
+    username:string;
+    petname:string;
+    pictureId:string;
+    picture:string;
+}
 
 export class Pet {
     id: string;

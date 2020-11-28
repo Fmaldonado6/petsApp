@@ -10,6 +10,10 @@
   align-items: center;
 }
 
+.error{
+  margin-top: 100px;
+}
+
 .background{
   background-color: white;
   position: fixed;

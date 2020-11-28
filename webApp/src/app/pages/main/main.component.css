@@ -14,6 +14,11 @@
   filter: brightness(.75);
 }
 
+.report {
+  color: grey;
+  margin-right: 10px;
+}
+
 .likes-dislikes {
   margin-left: auto;
 }
@@ -32,10 +37,15 @@
   top: 60px;
 }
 
-.icons mat-icon{
+.icons mat-icon {
   background-color: rgba(0, 0, 0, 0.493);
   border-radius: 20px;
   padding: 6px;
+}
+
+.error {
+  margin-top: 100px;
+
 }
 
 .dislike-icon {
@@ -44,7 +54,7 @@
 }
 
 .dislikes {
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .main-container {
@@ -132,9 +142,10 @@
     width: 95%;
   }
 
-  .loaded {
-    margin-top: 15%;
 
+
+  .action-buttons {
+    width: 95vw;
   }
 
   .card {

@@ -4,6 +4,10 @@
     <mat-spinner [diameter]="40"></mat-spinner>
   </div>
 
+  <div class="error"  *ngSwitchCase="Status.error">
+    <app-error></app-error>
+  </div>
+
   <div class="loaded" *ngSwitchCase="Status.loaded">
     <div class="header-container" fxLayout="row" fxLayoutAlign="start center">
       <input (change)="setProfilePicture($event)" #file type="file" fxShow="false">

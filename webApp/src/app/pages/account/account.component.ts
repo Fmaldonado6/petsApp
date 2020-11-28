@@ -1,3 +1,5 @@
+import { BadInput } from './../../shared/errors/errors';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PetsService } from './../../services/api/pets/pets.service';
 import { ConfirmComponent } from './../../components/modals/confirm/confirm.component';
 import { PicturesService } from './../../services/api/pictures/pictures.service';
@@ -25,12 +27,14 @@ export class AccountPage implements OnInit {
   profilePicture: Picture;
   pictureData: any
   myProfile = false;
+  petsError = false;
   constructor(
     private userService: UserService,
     private picturesService: PicturesService,
     private petsService: PetsService,
     private route: ActivatedRoute,
     private bottomSheet: MatBottomSheet,
+    private snackBar: MatSnackBar,
     private dialog: MatDialog) {
     this.userId = this.route.snapshot.paramMap.get('id');
     this.getUserInfo();
@@ -64,9 +68,15 @@ export class AccountPage implements OnInit {
     this.picturesService.addPicture(fd).subscribe(pic => {
       this.user.profilePictureId = pic.id
       this.userService.updateUser(this.user).subscribe(user => {
-        console.log(user)
         this.userService.setUser(user)
+      }, () => {
+        this.snackBar.open("Couldn´t change profile picture!", "CLOSE", { duration: 2000 });
       })
+    }, (e) => {
+
+      if (e instanceof BadInput)
+        return this.snackBar.open("Image file size must be less than 5mb!", "CLOSE", { duration: 2000 });
+      this.snackBar.open("Couldn´t change profile picture!", "CLOSE", { duration: 2000 });
     })
 
 
@@ -79,6 +89,8 @@ export class AccountPage implements OnInit {
       this.currentStatus = Status.loaded
       if (this.user.id == this.userService.loggedUser.id)
         this.myProfile = true
+    }, () => {
+      this.currentStatus = Status.error
     })
   }
 
@@ -125,7 +137,6 @@ export class AccountPage implements OnInit {
   openInfo(pet: Pet) {
     let width = window.innerWidth
     pet.owner = this.user
-    console.log(pet)
     if (width < 700) {
       const dialog = this.bottomSheet.open(InfoPetComponent)
       dialog.instance.petInfo = pet
