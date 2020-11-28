@@ -56,7 +56,6 @@ export class InfoPetComponent implements OnInit {
     this.picturesStatus = Status.loading
     this.picturesService.getPetPictures(this.petInfo.id).subscribe(pictures => {
       this.petInfo.pictures = pictures;
-      console.log(pictures)
       if (this.petInfo.pictures.length == 0)
         return this.picturesStatus = Status.empty
 

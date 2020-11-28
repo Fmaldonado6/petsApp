@@ -35,6 +35,25 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'pets': instance.pets?.map((e) => e?.toJson())?.toList(),
     };
 
+Report _$ReportFromJson(Map<String, dynamic> json) {
+  return Report()
+    ..id = json['id'] as String
+    ..petId = json['petId'] as String
+    ..username = json['username'] as String
+    ..petname = json['petname'] as String
+    ..pictureId = json['pictureId'] as String
+    ..picture = json['picture'] as String;
+}
+
+Map<String, dynamic> _$ReportToJson(Report instance) => <String, dynamic>{
+      'id': instance.id,
+      'petId': instance.petId,
+      'username': instance.username,
+      'petname': instance.petname,
+      'pictureId': instance.pictureId,
+      'picture': instance.picture,
+    };
+
 Picture _$PictureFromJson(Map<String, dynamic> json) {
   return Picture()
     ..id = json['id'] as String

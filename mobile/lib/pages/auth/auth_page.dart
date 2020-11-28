@@ -4,7 +4,7 @@ import 'package:mobile/pages/auth/widgets/login_widget.dart';
 class AuthPage extends StatelessWidget {
   final bool showSnackBar;
   final String message;
-  const AuthPage({Key key, this.showSnackBar, this.message}) : super(key: key);
+  const AuthPage({Key key, this.showSnackBar = false, this.message}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

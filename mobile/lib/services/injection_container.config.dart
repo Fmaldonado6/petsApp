@@ -18,6 +18,7 @@ import '../cubit/pictures/pictures_cubit.dart';
 import 'api/pictures/pictures_service.dart';
 import '../cubit/register/register_cubit.dart';
 import 'injection_container.dart';
+import 'api/reports/reports_service.dart';
 import '../cubit/users/users_cubit.dart';
 import 'api/users/user_service.dart';
 
@@ -33,13 +34,14 @@ GetIt $initGetIt(
   final registerModule = _$RegisterModule();
   gh.factory<PetsService>(() => PetsService(get<AppConfig>()));
   gh.factory<PicturesService>(() => PicturesService(get<AppConfig>()));
+  gh.factory<ReportsService>(() => ReportsService(get<AppConfig>()));
   gh.factory<UsersService>(() => UsersService(get<AppConfig>()));
   gh.factory<AuthService>(
       () => AuthService(get<AppConfig>(), get<FlutterSecureStorage>()));
   gh.factory<PetsCubit>(() => PetsCubit(
         get<PetsService>(),
         get<PicturesService>(),
-        get<AuthService>(),
+        get<ReportsService>(),
       ));
   gh.factory<PicturesCubit>(() => PicturesCubit(get<PicturesService>()));
   gh.factory<RegisterCubit>(() => RegisterCubit(get<UsersService>()));

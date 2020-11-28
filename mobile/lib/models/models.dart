@@ -22,6 +22,22 @@ class User {
 }
 
 @JsonSerializable(explicitToJson: true)
+class Report {
+  String id;
+  String petId;
+  String username;
+  String petname;
+  String pictureId;
+  String picture;
+
+  Report();
+
+  factory Report.fromJson(Map<String, dynamic> json) => _$ReportFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ReportToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class Picture {
   String id;
   String ownerId;

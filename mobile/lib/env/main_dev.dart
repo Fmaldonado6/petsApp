@@ -7,6 +7,8 @@ import '../app_config.dart';
 import '../main.dart';
 
 void main() {
+  HttpOverrides.global = new MyHttpOverrides();
+
   var configuredApp =
       new AppConfig(production: false, baseUrl: "http://192.168.1.84:8080/");
 

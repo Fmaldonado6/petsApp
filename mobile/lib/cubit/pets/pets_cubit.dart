@@ -7,6 +7,7 @@ import 'package:mobile/models/models.dart';
 import 'package:mobile/services/api/auth/auth_service.dart';
 import 'package:mobile/services/api/pets/pets_service.dart';
 import 'package:mobile/services/api/pictures/pictures_service.dart';
+import 'package:mobile/services/api/reports/reports_service.dart';
 import 'package:mobile/services/api/users/user_service.dart';
 import 'package:mobile/services/exceptions/exceptions.dart';
 
@@ -14,8 +15,8 @@ import 'package:mobile/services/exceptions/exceptions.dart';
 class PetsCubit extends Cubit<PetsState> {
   final PetsService petsService;
   final PicturesService picturesService;
-  final AuthService _authService;
-  PetsCubit(this.petsService, this.picturesService, this._authService)
+  final ReportsService reportsService;
+  PetsCubit(this.petsService, this.picturesService, this.reportsService)
       : super(PetsLoading());
 
   Future<void> getPets() async {
@@ -44,6 +45,15 @@ class PetsCubit extends Cubit<PetsState> {
   Future<bool> updatePet(Pet pet) async {
     try {
       await this.petsService.updatePet(pet);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> addReport(Report report) async {
+    try {
+      await this.reportsService.addReport(report);
       return true;
     } catch (e) {
       return false;

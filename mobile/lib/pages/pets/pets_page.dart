@@ -44,7 +44,7 @@ class _PetsPageState extends State<PetsPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Pets App"),
+        title: Text("PetRoulette"),
         actions: [
           PopupMenuButton(
             onSelected: (value) {},

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/cubit/pets/pets_cubit.dart';
 import 'package:mobile/models/models.dart';
 import 'package:mobile/pages/pet_detail/pet_detail.dart';
 import 'package:mobile/pages/users/user_page.dart';
+import 'package:mobile/shared_widgets/confirm_daialog.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PetName extends StatelessWidget {
   final Pet pet;
@@ -10,6 +13,26 @@ class PetName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void addReport() async {
+      Navigator.of(context).pop();
+
+      Report report = new Report();
+      report.petId = pet.id;
+      report.petname = pet.name;
+      report.username = pet.owner.name;
+      report.picture = pet.profilePicture.picture;
+      report.pictureId = pet.profilePictureId;
+      final response = await context.read<PetsCubit>().addReport(report);
+      if (!response)
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Couldn´t add report!"),
+          ),
+        );
+
+      context.read<PetsCubit>().getPets();
+    }
+
     final size = MediaQuery.of(context).size;
     return Ink(
       width: double.infinity,
@@ -102,6 +125,24 @@ class PetName extends StatelessWidget {
                       ),
                       Text(pet.dislikes.toString()),
                     ],
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.message,
+                      color: Colors.grey,
+                    ),
+                    onPressed: () {
+                      ConfirmDialog().show(
+                        title: "Report pet",
+                        text: "Would you like to report this pet?",
+                        confirm: "Report",
+                        context: context,
+                        callback: addReport,
+                      );
+                    },
                   ),
                   SizedBox(
                     width: 10,
