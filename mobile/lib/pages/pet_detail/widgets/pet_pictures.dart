@@ -1,3 +1,4 @@
+import 'package:PetRoulette/pages/image_detail/image_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -73,14 +74,16 @@ class _PetPicturesState extends State<PetPictures> {
             ),
           );
         }
+
+        widget.pet.pictures = (state as PicturesList).pictures;
+
         return Container(
           height: 175,
           child: Stack(
             children: [
               ListView(
                 scrollDirection: Axis.horizontal,
-                children: (state as PicturesList)
-                    .pictures
+                children: widget.pet.pictures
                     .map((e) => e.picture != null ? getPicture(e) : Container())
                     .toList(),
               ),
@@ -116,6 +119,7 @@ class _PetPicturesState extends State<PetPictures> {
         children: [
           PetPicture(
             picture: picture,
+            pictures: widget.pet.pictures,
           ),
           widget.isOwner && widget.pet.profilePictureId != picture.id
               ? Positioned(
@@ -153,19 +157,36 @@ class _PetPicturesState extends State<PetPictures> {
 class PetPicture extends StatelessWidget {
   final AppConfig config = AppConfig();
   final Picture picture;
-  PetPicture({Key key, @required this.picture}) : super(key: key);
+  final List<Picture> pictures;
+
+  PetPicture({Key key, @required this.picture, @required this.pictures})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 125,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(10),
-        ),
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: NetworkImage(config.baseUrl + picture.picture),
+    return Ink(
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context).push(
+            new MaterialPageRoute(
+              builder: (_) => ImageDetailPage(
+                pictures: pictures,
+                initial: this.pictures.indexOf(picture),
+              ),
+            ),
+          );
+        },
+        child: Container(
+          width: 125,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: NetworkImage(config.baseUrl + picture.picture),
+            ),
+          ),
         ),
       ),
     );

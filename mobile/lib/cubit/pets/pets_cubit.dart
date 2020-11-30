@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:PetRoulette/cubit/pets/pets_state.dart';
@@ -16,7 +17,10 @@ class PetsCubit extends Cubit<PetsState> {
   final PetsService petsService;
   final PicturesService picturesService;
   final ReportsService reportsService;
-  PetsCubit(this.petsService, this.picturesService, this.reportsService)
+  final FlutterSecureStorage _secureStorage;
+
+  PetsCubit(this.petsService, this.picturesService, this.reportsService,
+      this._secureStorage)
       : super(PetsLoading());
 
   Future<void> getPets() async {
@@ -25,9 +29,17 @@ class PetsCubit extends Cubit<PetsState> {
 
       List<Pet> pets = await this.petsService.getPets();
 
+      final firstTimeSaved = await this._secureStorage.read(key: "first_time");
+      bool firstTime = false;
+
+      if (firstTimeSaved == null) {
+        await this._secureStorage.write(key: "first_time", value: "false");
+        firstTime = true;
+      }
+
       if (pets.length == 0) return emit(PetsEmpty());
 
-      emit(PetsList(pets));
+      emit(PetsList(pets, firstTime));
     } catch (e) {
       print(e);
       emit(PetsError(e.toString()));

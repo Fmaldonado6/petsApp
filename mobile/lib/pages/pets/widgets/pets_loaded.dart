@@ -12,8 +12,8 @@ import 'pet_image.dart';
 
 class PetsLoaded extends StatefulWidget {
   final List<Pet> pets;
-
-  PetsLoaded({Key key, this.pets}) : super(key: key);
+  final bool showToast;
+  PetsLoaded({Key key, this.pets, this.showToast = false}) : super(key: key);
 
   @override
   _PetsLoadedState createState() => _PetsLoadedState();
@@ -33,6 +33,14 @@ class _PetsLoadedState extends State<PetsLoaded> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.showToast)
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Swipe right to like, left to dislike"),
+          ),
+        );
+      });
     return Container(
       width: double.infinity,
       child: Column(

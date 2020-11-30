@@ -56,6 +56,7 @@ class PetImage extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
+              color: Colors.black.withOpacity(.5),
               border: Border.all(color: color, width: 2),
             ),
             child: Icon(

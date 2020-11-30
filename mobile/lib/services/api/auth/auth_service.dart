@@ -39,6 +39,7 @@ class AuthService extends DataService {
     UsersService.loggedUserInfo = null;
   }
 
+
   Future<void> saveToken(String token) async {
     AuthService.token = token;
     await _secureStorage.write(key: "refresh_token", value: token);

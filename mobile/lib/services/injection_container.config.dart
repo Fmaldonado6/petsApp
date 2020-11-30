@@ -42,6 +42,7 @@ GetIt $initGetIt(
         get<PetsService>(),
         get<PicturesService>(),
         get<ReportsService>(),
+        get<FlutterSecureStorage>(),
       ));
   gh.factory<PicturesCubit>(() => PicturesCubit(get<PicturesService>()));
   gh.factory<RegisterCubit>(() => RegisterCubit(get<UsersService>()));

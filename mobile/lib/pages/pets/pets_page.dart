@@ -118,6 +118,7 @@ class _PetsPageState extends State<PetsPage> {
             if (state is PetsList)
               return PetsLoaded(
                 pets: state.pets,
+                showToast: state.firstTime,
               );
 
             return Center(

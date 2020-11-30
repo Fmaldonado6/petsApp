@@ -12,7 +12,8 @@ class PetsLoading extends PetsState {
 
 class PetsList extends PetsState {
   final List<Pet> pets;
-  const PetsList(this.pets);
+  final bool firstTime;
+  const PetsList(this.pets, this.firstTime);
 }
 
 class PetsCompleted extends PetsState {
