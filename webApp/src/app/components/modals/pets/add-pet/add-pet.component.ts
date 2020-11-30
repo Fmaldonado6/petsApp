@@ -103,6 +103,9 @@ export class AddPetModal implements OnInit {
       }
 
 
+    }, () => {
+      this.currenStatus = Status.error
+
     })
 
 
@@ -132,6 +135,9 @@ export class AddPetModal implements OnInit {
       })
 
     }, (e) => {
+
+      this.petsService.deletePet(pet).subscribe();
+
       if (e instanceof BadInput)
         return this.currenStatus = Status.badInput
 

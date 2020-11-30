@@ -9,7 +9,6 @@ export class TokenInterceptorService {
   intercept(req, next) {
     let token = req;
     if (this.authService.getToken()) {
-    console.log(token)
 
       token = req.clone({
         setHeaders: {
