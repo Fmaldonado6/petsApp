@@ -1,10 +1,10 @@
 .image-container {
   position: fixed;
-  background-color: black;
+  background-color: rgb(255, 255, 255);
   width: 30vw;
   height: 60vh;
   border-radius: 15px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 15px;
   transition: filter .3s ease;
   cursor: pointer;

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "388889478375",
+    "firebase_url": "https://petroulette-62f1b.firebaseio.com",
+    "project_id": "petroulette-62f1b",
+    "storage_bucket": "petroulette-62f1b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388889478375:android:c3832c4db02a1e55920e42",
+        "android_client_info": {
+          "package_name": "com.fmaldonado.petroulette"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388889478375-qct0psaph6rkaomrfireluphk3kjjan8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxh3ejkfKxtBO5tT8LbuD6C9RO__x6LeY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388889478375-qct0psaph6rkaomrfireluphk3kjjan8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

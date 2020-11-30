@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { BadInput } from './../../shared/errors/errors';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PetsService } from './../../services/api/pets/pets.service';
@@ -28,6 +29,7 @@ export class AccountPage implements OnInit {
   pictureData: any
   myProfile = false;
   petsError = false;
+  baseUrl = environment.base_url
   constructor(
     private userService: UserService,
     private picturesService: PicturesService,

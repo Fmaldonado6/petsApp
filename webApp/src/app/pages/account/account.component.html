@@ -4,7 +4,7 @@
     <mat-spinner [diameter]="40"></mat-spinner>
   </div>
 
-  <div class="error"  *ngSwitchCase="Status.error">
+  <div class="error" *ngSwitchCase="Status.error">
     <app-error></app-error>
   </div>
 
@@ -42,7 +42,7 @@
           <button (click)="delete(pet, $event)" *ngIf="myProfile" class="delete-button" mat-icon-button color="accent">
             <mat-icon>close</mat-icon>
           </button>
-          <img class="mat-elevation-z4" [src]="'http://localhost:8080/'+pet.profilePicture.picture">
+          <img class="mat-elevation-z4" [src]="baseUrl+pet.profilePicture.picture">
           <span>{{pet.name}}</span>
         </div>
       </div>

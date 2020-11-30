@@ -1,4 +1,5 @@
 package com.fmaldonado.petsApp.webApi;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -18,6 +19,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -42,6 +44,21 @@ public class PetsAppApplication {
         return new ObjectMapper();
     }
 
+    @Configuration
+    class RequestLoggingFilterConfig {
+
+        @Bean
+        public CommonsRequestLoggingFilter logFilter() {
+            CommonsRequestLoggingFilter filter = new CommonsRequestLoggingFilter();
+            filter.setIncludeQueryString(true);
+            filter.setIncludePayload(true);
+            filter.setMaxPayloadLength(10000);
+            filter.setIncludeHeaders(false);
+            filter.setAfterMessagePrefix("REQUEST DATA : ");
+            return filter;
+        }
+    }
+
     @EnableWebSecurity
     @Configuration
     class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -52,8 +69,8 @@ public class PetsAppApplication {
             http.csrf().disable()
                     .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                     .authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/auth").permitAll()
-                    .antMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
-                    .antMatchers("/media/**").permitAll().anyRequest().authenticated();
+                    .antMatchers(HttpMethod.POST, "/api/v1/users").permitAll().antMatchers("/media/**").permitAll()
+                    .anyRequest().authenticated();
 
         }
     }
@@ -75,7 +92,7 @@ public class PetsAppApplication {
             if (dirName.startsWith("../"))
                 dirName = dirName.replace("../", "");
 
-            registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/" + uploadPath + "/");
+            registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file://" + uploadPath + "/");
         }
     }
 

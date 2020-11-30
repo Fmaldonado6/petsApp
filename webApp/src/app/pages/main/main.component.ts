@@ -10,6 +10,7 @@ import { Status } from 'src/app/shared/models/Status';
 import { StackConfig } from 'angular2-swing';
 import { Router } from '@angular/router';
 import { ReportsService } from 'src/app/services/api/reports/reports.service';
+import { environment } from 'src/environments/environment';
 
 const RIGHT = "Symbol(RIGHT)"
 const LEFT = "Symbol(LEFT)"
@@ -26,6 +27,8 @@ export class MainPage implements OnInit {
   like = false;
   dislike = false;
   pets: Pet[]
+  baseUrl = environment.base_url
+
   currentPet = 0
   stackConfig: StackConfig;
   constructor(

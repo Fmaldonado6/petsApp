@@ -3,6 +3,8 @@ import 'package:PetRoulette/cubit/pets/pets_cubit.dart';
 import 'package:PetRoulette/models/models.dart';
 import 'package:PetRoulette/pages/pet_detail/widgets/pet_info.dart';
 import 'package:PetRoulette/services/injection_container.dart';
+import 'package:flutter_native_admob/flutter_native_admob.dart';
+import 'package:flutter_native_admob/native_admob_controller.dart';
 
 class PetDetails extends StatefulWidget {
   final Pet pet;
@@ -15,12 +17,23 @@ class PetDetails extends StatefulWidget {
 
 class _PetDetailsState extends State<PetDetails> {
   bool isOwner = false;
+  
   final _petsCubit = getIt.get<PetsCubit>();
+  
+
   @override
   void initState() {
     super.initState();
     isOwner = _petsCubit.isOwner(widget.pet);
+    
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _petsCubit.close();
+  }
+
 
   @override
   Widget build(BuildContext context) {
