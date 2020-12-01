@@ -9,7 +9,12 @@ span {
 
 
 mat-toolbar {
-  background-color: transparent;
+  background-color: #ef5350 !important;
+  height: 56px;
+  position: relative;
+  margin: 0 auto;
+  max-width: 700px;
+  width: 90%;
 }
 
 img {
@@ -23,6 +28,7 @@ img {
 
 }
 
+
 .image-container {
   position: absolute;
   cursor: pointer;
@@ -34,4 +40,16 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+
+@media(max-width: 601px) {
+  mat-toolbar {
+    width: 100vw;
+    margin: 0 0;
+    min-width: 100vw;
+
+
+  }
 }

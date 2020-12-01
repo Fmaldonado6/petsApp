@@ -39,9 +39,13 @@ export class MainPage implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.getPets();
-    this.stackConfig = {
+    this.stackConfig= {
 
-      minThrowOutDistance: 2000
+      minThrowOutDistance: 10,
+      throwOutConfidence: (offsetX, offsetY, element) => {
+        return Math.min(Math.max(Math.abs(offsetX) / (element.offsetWidth / 1.7), Math.abs(offsetY) / (element.offsetHeight / 2)), 1);
+      },
+
     };
   }
 

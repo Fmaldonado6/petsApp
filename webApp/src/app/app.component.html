@@ -4,10 +4,8 @@
   </div>
 
   <div class="loaded" *ngSwitchCase="Status.loaded">
-    <login (loginEvent)="login()"  *ngIf="!loggedIn"></login>
-    <div class="container">
-      <logged-in (signOutEvent)="signOut()" *ngIf="loggedIn"></logged-in>
-    </div>
+    <login (loginEvent)="login()" *ngIf="!loggedIn"></login>
+    <logged-in (signOutEvent)="signOut()" *ngIf="loggedIn"></logged-in>
   </div>
 
 </ng-container>
