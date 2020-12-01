@@ -46,7 +46,13 @@ export class MainPage implements OnInit {
   }
 
   ngOnInit(): void {
+    let first = localStorage.getItem("first-time");
 
+    if (first == null)
+      return
+
+    localStorage.setItem("first-time", "true");
+    this.snackBar.open("Swipe right to like, left to dislike", "OK", { duration: 4000 })
   }
 
   getPets() {
