@@ -48,7 +48,7 @@ export class MainPage implements OnInit {
   ngOnInit(): void {
     let first = localStorage.getItem("first-time");
 
-    if (first == null)
+    if (first != null)
       return
 
     localStorage.setItem("first-time", "true");

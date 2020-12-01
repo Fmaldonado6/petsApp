@@ -17,7 +17,7 @@
           <mat-icon>add</mat-icon>
         </div>
         <mat-icon *ngIf="user.profilePicture == null">perm_identity</mat-icon>
-        <img *ngIf="user.profilePicture && !pictureData" [src]="'http://localhost:8080/'+user.profilePicture.picture">
+        <img *ngIf="user.profilePicture && !pictureData" [src]="baseUrl+user.profilePicture.picture">
         <img *ngIf="user.profilePicture  && pictureData " [src]="user.profilePicture.picture">
 
       </div>
