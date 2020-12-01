@@ -14,6 +14,10 @@
 
 }
 
+::ng-deep .carousel-cell img{
+  object-fit: contain !important;
+}
+
 .pic {
   height: 170px;
   min-height: 170px;
@@ -84,7 +88,12 @@
   border-radius: 10px;
   min-width: 120px;
   min-height: 160px;
+  cursor: pointer;
+  transition: filter .3s ease;
+}
 
+.pet-image:hover{
+  filter: brightness(.75);
 }
 
 .overlay {

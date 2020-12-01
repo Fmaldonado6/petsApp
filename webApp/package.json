@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "publish" :"ng build --prod --base-href \"https://fmaldonado6.github.io/petsApp/\"&& npx angular-cli-ghpages --dir=dist/webApp"
+    "publish": "ng build --prod --base-href \"http://petroulette.tk/\"&& npx angular-cli-ghpages --dir=dist/webApp"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +23,7 @@
     "@angular/platform-browser": "~10.2.0",
     "@angular/platform-browser-dynamic": "~10.2.0",
     "@angular/router": "~10.2.0",
+    "angular-gallery": "^1.0.2",
     "angular2-swing": "^0.14.0",
     "ng-swipe-card": "0.0.4",
     "rxjs": "~6.6.0",

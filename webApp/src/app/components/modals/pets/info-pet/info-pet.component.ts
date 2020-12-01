@@ -8,6 +8,7 @@ import { environment } from './../../../../../environments/environment';
 import { Pet, Picture } from './../../../../shared/models/dataModels';
 import { Component, Input, OnInit } from '@angular/core';
 import { PicturesService } from 'src/app/services/api/pictures/pictures.service';
+import { Gallery } from 'angular-gallery';
 
 @Component({
   selector: 'app-info-pet',
@@ -26,6 +27,7 @@ export class InfoPetComponent implements OnInit {
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
+    private gallery: Gallery,
     private picturesService: PicturesService,
     private router: Router
   ) {
@@ -38,6 +40,20 @@ export class InfoPetComponent implements OnInit {
     setTimeout(() => this.loadInfo(), 100)
   }
 
+  showGallery(index: number) {
+
+    let images = []
+
+    for (let picture of this.petInfo.pictures) {
+      images.push({ path: this.basePath + picture.picture });
+    }
+
+    let prop = {
+      images: images,
+      index
+    };
+    this.gallery.load(prop);
+  }
   uploadPicture(event) {
     if (!event.target.files || !event.target.files[0])
       return
@@ -88,8 +104,8 @@ export class InfoPetComponent implements OnInit {
   }
 
   ownerDetails(userId) {
-    
-    if(this.ref instanceof MatDialogRef)
+
+    if (this.ref instanceof MatDialogRef)
       this.ref.close();
     else
       this.ref.dismiss();
