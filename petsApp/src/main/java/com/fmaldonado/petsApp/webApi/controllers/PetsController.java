@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.http.HttpStatus;
@@ -82,7 +83,7 @@ public class PetsController {
 
                 pet.setOwner(user);
 
-                if (pet.getProfilePictureId() == null){
+                if (pet.getProfilePictureId() == null) {
                     returnList.add(pet);
                     continue;
                 }
@@ -94,6 +95,8 @@ public class PetsController {
                 returnList.add(pet);
 
             }
+
+            Collections.shuffle(returnList);
 
             return new ResponseEntity<>(returnList, HttpStatus.OK);
         } catch (Exception e) {

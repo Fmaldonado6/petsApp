@@ -10,7 +10,7 @@
 
     </div>
     <img *ngFor="let pet of pets;let i = index" swing-card class="image-container mat-elevation-z5"
-      [src]="baseUrl+pet.profilePicture.picture">
+      [src]="pet.profilePicture != null ?  baseUrl+pet.profilePicture.picture : null">
 
     <div class="action-buttons" fxLayout="row">
    
