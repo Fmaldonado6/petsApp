@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.fmaldonado.petsApp.core.IUnitOfWork;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -78,7 +79,7 @@ public class UsersController {
 
             User exists = this.unitOfWork.getUsers().findByEmail(user.getEmail());
 
-            if(exists != null)
+            if (exists != null)
                 return new ResponseEntity<>(null, HttpStatus.CONFLICT);
 
             user.setPassword(this.passwordEncoder.encode((CharSequence) user.getPassword()));
@@ -91,13 +92,48 @@ public class UsersController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable final String id) {
+
+        try {
+
+            User user = this.unitOfWork.getUsers().get(id);
+
+            if (user == null)
+                return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+
+            List<Pet> pets = this.unitOfWork.getPets().getPetsByOwnerId(id);
+
+            for (Pet pet : pets) {
+
+                this.unitOfWork.getPets().delete(pet.getId());
+
+            }
+
+            this.unitOfWork.getPictures().delete(user.getProfilePictureId());
+
+            this.unitOfWork.getUsers().delete(id);
+
+            return new ResponseEntity<>(null, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
     @PutMapping({ "/{id}" })
     public ResponseEntity<User> update(@RequestBody final User user) {
         try {
 
             final User oldUser = this.unitOfWork.getUsers().get(user.getId());
 
-            if (!user.getPassword().isEmpty() && user.getPassword() != null)
+            final User exists = this.unitOfWork.getUsers().findByEmail(user.getEmail());
+
+            if (exists != null && exists.getId() != user.getId())
+                return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+
+            if (user.getPassword() != null && !user.getPassword().isEmpty())
                 user.setPassword(this.passwordEncoder.encode((CharSequence) user.getPassword()));
             else
                 user.setPassword(oldUser.getPassword());

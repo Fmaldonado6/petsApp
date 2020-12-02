@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fmaldonado.petsApp.webApi.utils.ImageCompression;
 import com.fmaldonado.petsApp.webApi.utils.JWTAuthorizationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,7 +37,12 @@ public class PetsAppApplication {
 
     @Bean
     public PasswordEncoder encoder() {
-        return (PasswordEncoder) new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public ImageCompression compressor(){
+        return new ImageCompression();
     }
 
     @Bean

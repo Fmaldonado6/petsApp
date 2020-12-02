@@ -4,4 +4,7 @@ export class AppError {
 
 export class BadInput extends AppError{}
 
+export class Conflict extends AppError{}
+
+
 export class NotFoundError extends AppError{}

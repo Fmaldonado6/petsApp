@@ -16,8 +16,13 @@ public class PetsService extends Service<Pet, String> implements IPetsService {
 
     @Override
     public CrudRepository<Pet, String> getDao() {
-        return (CrudRepository<Pet, String>) this.petsDao;
+        return this.petsDao;
     }
+    @Override
+    public List<Pet> getRandomPets(){
+        return this.petsDao.getRandomPets();
+    }
+
 
     @Override
     public List<Pet> getPetsByOwnerId(final String id) {

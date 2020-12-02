@@ -12,22 +12,24 @@
     <div class="header-container" fxLayout="row" fxLayoutAlign="start center">
       <input (change)="setProfilePicture($event)" #file type="file" fxShow="false">
 
-      <div  class="image-container mat-elevation-z4" (click)="file.click()">
+      <div class="image-container mat-elevation-z4" (click)="file.click()">
         <div class="overlay">
           <mat-icon>add</mat-icon>
         </div>
         <mat-icon *ngIf="user.profilePicture == null">perm_identity</mat-icon>
-        <img *ngIf="user.profilePicture && !pictureData" [src]="baseUrl+user.profilePicture.picture">
-        <img *ngIf="user.profilePicture  && pictureData " [src]="user.profilePicture.picture">
+        <img *ngIf="user.profilePicture" [src]="baseUrl+user.profilePicture.picture">
 
       </div>
       <div class="info" fxLayout="column">
         <span class="name">{{user.name}}</span>
-        <div class="content" fxLayout="row" fxLayoutAlign="start ">
-          <span class="pets-button" fxLayout="row" fxLayoutAlign="center center">
+        <div class="content" fxLayoutAlign="start ">
+          <span class="pets-button chip-button" fxLayout="row" fxLayoutAlign="center center">
             PETS: {{user.pets.length}}
           </span>
-          <mat-icon  *ngIf="myProfile" class="add-button" matRipple (click)="openAddModal()">add</mat-icon>
+          <span *ngIf="myProfile" (click)="openEditUser()" matRipple class="edit-user-button chip-button" fxLayout="row"
+            fxLayoutAlign="center center">
+            Edit user
+          </span>
         </div>
       </div>
     </div>
@@ -36,18 +38,32 @@
       <div class="empty" *ngIf="user.pets.length == 0">
         <empty text="No pets added"></empty>
       </div>
-      <div class="content" fxLayout="row wrap" fxLayoutAlign="start">
-        <div fxFlex="none" class="pet " *ngFor="let pet of user.pets; let i = index" (click)="openInfo(pet)"
-          [ngClass]="{'margin-fix': isLastElementRow(i)}">
-          <button (click)="delete(pet, $event)" *ngIf="myProfile" class="delete-button" mat-icon-button color="accent">
-            <mat-icon>close</mat-icon>
-          </button>
-          <img *ngIf="pet.profilePicture" class="mat-elevation-z4" [src]="baseUrl+pet.profilePicture.picture">
-          <div class="no-pfp mat-elevation-z4" *ngIf="!pet.profilePicture">
-          <mat-icon >pets</mat-icon></div>
-          <span>{{pet.name}}</span>
-        </div>
+      <div class="content" fxLayout="column" fxLayoutAlign="start">
+        <mat-list role="list">
+          <mat-list-item class="pet-container" *ngFor="let pet of user.pets; let i = index" (click)="openInfo(pet)"
+            role="listitem">
+            <img mat-list-icon [src]="baseUrl+pet.profilePicture.picture">
+            <span>{{pet.name}}</span>
+            <button (click)="$event.stopPropagation();" [matMenuTriggerFor]="menu" [matMenuTriggerData]="{pet: pet}"
+              id="more" mat-icon-button>
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+
       </div>
     </div>
   </div>
 </ng-container>
+
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-pet="pet">
+    <button (click)="openPicturesModal(pet,$event)" mat-menu-item>Edit Pictures</button>
+    <button (click)="openEdit(pet,$event)" mat-menu-item>Edit Pet info</button>
+    <button (click)="delete(pet,$event)" mat-menu-item>Delete</button>
+  </ng-template>
+</mat-menu>
+<button (click)="openAddModal()" *ngIf="myProfile" color="primary" [ngClass]="{'hide':hideFab}" class="fab" mat-fab
+  aria-label="Example icon button with a heart icon">
+  <mat-icon>add</mat-icon>
+</button>

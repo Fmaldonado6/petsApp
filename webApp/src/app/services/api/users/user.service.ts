@@ -1,4 +1,4 @@
-import { User } from './../../../shared/models/dataModels';
+import { User } from 'src/app/shared/models/dataModels';
 import { DataService } from './../data.service';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/internal/operators/catchError';
@@ -23,6 +23,10 @@ export class UserService extends DataService {
   getUserInfo(id: string) {
     return this.http.get<User>(`${this.url}/users/${id}`).pipe(catchError(this.handleError))
 
+  }
+
+  deleteUser(user: User) {
+    return this.http.delete(`${this.url}/users/${user.id}`).pipe(catchError(this.handleError))
   }
 
   setUser(user: User) {

@@ -1,0 +1,121 @@
+.dialog {
+  min-width: 400px;
+  max-width: 400px;
+}
+
+.pictures{
+    min-height: 400px;
+}
+
+.completed {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.completed info-menu {
+  position: relative;
+  width: 100%;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.image-container {
+  position: relative;
+  height: 130px;
+  width: 130px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  overflow: hidden;
+  border-radius: 100%;
+
+}
+
+.overlay {
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.664);
+  border-radius: 100%;
+  z-index: 10;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .3s ease;
+}
+
+
+
+.profile-picture {
+  object-fit: scale-down;
+  position: relative;
+  height: 130px;
+  width: 130px;
+  border-radius: 100%;
+}
+
+.overlay mat-icon {
+  color: rgb(224, 224, 224) !important;
+
+}
+
+.overlay:hover {
+  opacity: 1;
+}
+
+.image-container mat-icon {
+  transform: scale(2.5);
+  color: rgb(92, 92, 92);
+}
+
+.form {
+  margin-top: 20px;
+}
+
+
+.icon-suffix {
+  color: grey;
+}
+
+
+@media (max-width: 700px) {
+  .dialog {
+    width: 100%;
+    min-width: 20px;
+    min-height: 80vh;
+
+    max-height: 80vh;
+  }
+
+  .completed {
+    height: 70vh;
+
+  }
+
+  .image-container {
+    height: 100px;
+    width: 100px;
+
+
+  }
+
+  .loaded {
+    height: 100%;
+    padding-bottom: 10px;
+  }
+
+}

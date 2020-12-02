@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.fmaldonado.petsApp.core.domain.Comment;
 import com.fmaldonado.petsApp.core.domain.User;
+import com.fmaldonado.petsApp.webApi.utils.ImageCompression;
 import com.fmaldonado.petsApp.webApi.utils.JWTAuthorizationFilter;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,10 @@ public class PicturesController {
 
     @Autowired
     private IUnitOfWork unitOfWork;
+    
+    @Autowired
+    private ImageCompression imageCompression;
+    
     @Autowired
     private ObjectMapper jsonMapper;
 
@@ -99,6 +104,8 @@ public class PicturesController {
             User userInfo = jsonMapper.readValue(subject, User.class);
 
             String name = unitOfWork.getFiles().saveFromBytes(file.getInputStream(), extension);
+
+            imageCompression.compressFile(name, extension);
 
             Picture savedPicture = new Picture();
 

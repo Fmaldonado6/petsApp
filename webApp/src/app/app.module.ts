@@ -22,6 +22,9 @@ import { InfoPetComponent } from './components/modals/pets/info-pet/info-pet.com
 import { ConfirmComponent } from './components/modals/confirm/confirm.component';
 import { ErrorComponent } from './components/shared/error/error.component';
 import {IvyGalleryModule} from 'angular-gallery';
+import { EditPetComponent } from './components/modals/pets/edit-pet/edit-pet.component';
+import { EditPicturesComponent } from './components/modals/edit-pictures/edit-pictures.component';
+import { EditUserComponent } from './components/modals/users/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import {IvyGalleryModule} from 'angular-gallery';
     InfoPetComponent,
     ConfirmComponent,
     ErrorComponent,
+    EditPetComponent,
+    EditPicturesComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,
