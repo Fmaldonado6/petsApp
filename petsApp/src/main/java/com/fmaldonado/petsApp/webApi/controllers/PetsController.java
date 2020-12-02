@@ -70,7 +70,7 @@ public class PetsController {
     @GetMapping({ "" })
     public ResponseEntity<List<Pet>> getPets() {
         try {
-            final List<Pet> petsList = this.unitOfWork.getPets().getAll();
+            final List<Pet> petsList = this.unitOfWork.getPets().getRandomPets();
             final List<Pet> returnList = new ArrayList<>();
             for (Pet pet : petsList) {
 

@@ -4,5 +4,6 @@ export enum Status {
   error,
   completed,
   empty,
-  badInput
+  badInput,
+  repeated
 }

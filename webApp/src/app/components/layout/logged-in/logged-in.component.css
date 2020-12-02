@@ -1,0 +1,11 @@
+navbar{
+    position: fixed;
+    top: 0;
+    z-index: 15;
+}
+
+.container{
+    margin-top: 70px !important;
+    height: calc(100vh - 70px) !important;
+    bottom: 0;
+}

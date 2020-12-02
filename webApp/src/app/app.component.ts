@@ -18,22 +18,27 @@ export class AppComponent {
 
   constructor(private authService: AuthService, private userService: UserService, private router: Router,
   ) {
-
     this.loggedIn = this.authService.loggedIn();
+
     if (!this.loggedIn)
       this.currentSatus = Status.loaded
     else
       this.getUserInfo();
 
+    this.router.events.subscribe(e => {
+      this.loggedIn = this.authService.loggedIn();
+
+    })
+
   }
 
-  signOut(){
+  signOut() {
     this.loggedIn = false
     this.authService.signOut();
     this.router.navigate(["/"])
   }
 
-  login(){
+  login() {
     this.loggedIn = true;
     this.getUserInfo();
   }
@@ -47,8 +52,10 @@ export class AppComponent {
     this.userService.getUserInfo(userInfo.id).subscribe(user => {
       this.userService.setUser(user)
       this.currentSatus = Status.loaded
-    },()=>{
+    }, () => {
       this.signOut();
+      this.currentSatus = Status.loaded
+
     })
   }
 

@@ -24,6 +24,8 @@ export class PetsService extends DataService {
   }
 
   updatePet(pet: Pet) {
+    pet.owner = null;
+    pet.pictures = null;
     return this.http.put<Pet>(`${this.url}/pets/${pet.id}`, pet).pipe(catchError(this.handleError))
 
   }

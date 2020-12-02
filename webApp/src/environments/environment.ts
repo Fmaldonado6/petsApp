@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  base_url:"https://petsapp.cloudns.cl/"
+  base_url:"http://localhost:8080/"
 };
 
 /*

@@ -1,3 +1,4 @@
+import { Conflict } from './../../shared/errors/errors';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
@@ -20,6 +21,9 @@ export class DataService {
 
     if (error.status === 404)
       return throwError(new NotFoundError(error));
+
+    if (error.status === 409)
+      return throwError(new Conflict(error));
 
     return throwError(new AppError(error));
   }

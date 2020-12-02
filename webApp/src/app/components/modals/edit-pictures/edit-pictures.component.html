@@ -1,0 +1,30 @@
+<div class="main-container" [ngSwitch]="currentStatus">
+  <div class="loading" *ngSwitchCase="Status.loading">
+    <mat-spinner [diameter]="40"></mat-spinner>
+  </div>
+
+  <div class="loaded" *ngSwitchCase="Status.loaded">
+    <div class="header" fxLayout="row">
+      <mat-icon *ngIf="showBackIcon" class="back-icon" (click)="backButtonPressed()">chevron_left</mat-icon>
+      <span class="title">Pet Pictures</span>
+    </div>
+    <input #file fxShow="false" (change)="uploadPicture($event)" type="file">
+    <div class="pictures-container " fxLayout="row wrap" fxLayoutGap="10px grid">
+      <div fxFlex="0 1 calc(30% - 10px)" [ngClass]="{'fix-margin':pictures.length>1}" (click)="file.click()" matRipple
+        class="image-container mat-elevation-z3">
+        <mat-icon>add</mat-icon>
+      </div>
+      <div class="image-container mat-elevation-z3" matRipple fxFlex="0 1 calc(30% - 10px)"
+        *ngFor="let picture of pictures;" [ngClass]="{'fix-margin':pictures.length>1}" (click)="selectPicture(picture)">
+        <button *ngIf="picture.id != pet.profilePictureId" class="delete" (click)="delete(picture); $event.stopPropagation()" mat-icon-button
+          color="accent">
+          <mat-icon>close</mat-icon>
+        </button>
+
+        <img [src]="baseUrl+picture.picture">
+      </div>
+
+    </div>
+
+
+  </div>
